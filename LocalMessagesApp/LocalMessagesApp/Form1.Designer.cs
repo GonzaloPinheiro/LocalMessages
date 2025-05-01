@@ -1,6 +1,6 @@
 ﻿namespace LocalMessagesApp
 {
-    partial class Form1
+    partial class AppForm1
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -116,7 +116,7 @@
             this.lbxChat.Size = new System.Drawing.Size(604, 340);
             this.lbxChat.TabIndex = 8;
             // 
-            // Form1
+            // AppForm1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -131,8 +131,8 @@
             this.Controls.Add(this.tbxReceiver);
             this.Controls.Add(this.tbxUserName);
             this.Controls.Add(this.btnConection);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "AppForm1";
+            this.Text = "App";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -4,9 +4,9 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-class Program
+class Server
 {
-    static List<Cliente> conectedClients = new List<Cliente>();
+    static List<Client> conectedClients = new List<Client>();
     static Thread serverThread;
     static bool activeServer = false;
 
@@ -34,6 +34,7 @@ class Program
         Console.ReadLine(); // <- esto evita que el programa termine
     }
 
+
     // Method to launch the server
     static void launchServer()
     {
@@ -54,7 +55,7 @@ class Program
             {
                 TcpClient clientTcp = escuchaTcp.AcceptTcpClient();
 
-                Cliente clienteNuevo = new Cliente
+                Client clienteNuevo = new Client
                 {
                     clientName = "",
                     tcpClient = clientTcp
@@ -69,6 +70,8 @@ class Program
 
                 Console.WriteLine("Conexión aceptada desde " + clientTcp.Client.RemoteEndPoint);
 
+
+                //Launching a thread for the new client
                 Thread clienteThread = new Thread(() => HiloCliente(clientTcp, clienteNuevo));
                 clienteThread.Start();
             }
@@ -80,7 +83,7 @@ class Program
     }
 
     // Manager for the client thread
-    static void HiloCliente(TcpClient tcpClient, Cliente cliente)
+    static void HiloCliente(TcpClient tcpClient, Client client)
     {
         try
         {
@@ -88,8 +91,8 @@ class Program
             int recivedBytes;
 
             recivedBytes = tcpClient.Client.Receive(b);
-            cliente.clientName = Encoding.ASCII.GetString(b, 0, recivedBytes);
-            Console.WriteLine("New connected client: " + cliente.clientName + "\n\n");
+            client.clientName = Encoding.ASCII.GetString(b, 0, recivedBytes);
+            Console.WriteLine("New connected client: " + client.clientName + "\n\n");
 
             lock (conectedClients)
             {
@@ -97,7 +100,7 @@ class Program
                 { 
                     if (conectedClients[i].tcpClient.Client == tcpClient.Client)
                     {
-                        conectedClients[i].clientName = cliente.clientName;
+                        conectedClients[i].clientName = client.clientName;
                         break;
                     }
                 }
@@ -112,20 +115,20 @@ class Program
                     break;
 
                 string mensaje = Encoding.ASCII.GetString(b, 0, recivedBytes);
-                Console.WriteLine($"Mensaje del cliente ({cliente.clientName}): {mensaje}");
+                Console.WriteLine($"Mensaje del cliente ({client.clientName}): {mensaje}");
 
 
-                string clientText = $"{cliente.clientName}: {mensaje}";
+                string clientText = $"{client.clientName}: {mensaje}";
                 sendMessage(clientText, tcpClient);
                 
             }
 
             tcpClient.Close();
-            Console.WriteLine($"Cliente desconectado: {cliente.clientName}");
+            Console.WriteLine($"Cliente desconectado: {client.clientName}");
 
             lock (conectedClients)
             {
-                conectedClients.Remove(cliente);
+                conectedClients.Remove(client);
             }
         }
         catch (Exception e)
@@ -145,10 +148,10 @@ class Program
             {
                 try
                 {
-                    if (cliente.tcpClient.Client != emisor.Client)
-                    {
+                    //if (cliente.tcpClient.Client != emisor.Client)
+                    //{
                         cliente.tcpClient.Client.Send(datos);
-                    }
+                    //}
                 }
                 catch (Exception e)
                 {
@@ -159,7 +162,7 @@ class Program
     }
 }
 
-class Cliente
+class Client
 {
     public string clientName;
     public TcpClient tcpClient;

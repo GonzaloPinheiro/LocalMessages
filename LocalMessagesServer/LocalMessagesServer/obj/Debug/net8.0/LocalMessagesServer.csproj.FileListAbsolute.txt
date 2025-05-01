@@ -12,3 +12,4 @@ C:\GitHub\LocalMessages\LocalMessagesServer\LocalMessagesServer\obj\Debug\net8.0
 C:\GitHub\LocalMessages\LocalMessagesServer\LocalMessagesServer\obj\Debug\net8.0\LocalMessagesServer.pdb
 C:\GitHub\LocalMessages\LocalMessagesServer\LocalMessagesServer\obj\Debug\net8.0\LocalMessagesServer.genruntimeconfig.cache
 C:\GitHub\LocalMessages\LocalMessagesServer\LocalMessagesServer\obj\Debug\net8.0\ref\LocalMessagesServer.dll
+C:\GitHub\LocalMessages\LocalMessagesServer\LocalMessagesServer\obj\Debug\net8.0\LocalMessagesServer.sourcelink.json

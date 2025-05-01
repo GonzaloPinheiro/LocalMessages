@@ -2,9 +2,9 @@ C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesApp\bin\Debug\LocalMessage
 C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesApp\bin\Debug\LocalMessagesApp.exe
 C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesApp\bin\Debug\LocalMessagesApp.pdb
 C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesApp\obj\Debug\LocalMessagesApp.csproj.AssemblyReference.cache
-C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesApp\obj\Debug\LocalMessagesApp.Form1.resources
 C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesApp\obj\Debug\LocalMessagesApp.Properties.Resources.resources
 C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesApp\obj\Debug\LocalMessagesApp.csproj.GenerateResource.cache
 C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesApp\obj\Debug\LocalMessagesApp.csproj.CoreCompileInputs.cache
 C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesApp\obj\Debug\LocalMessagesApp.exe
 C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesApp\obj\Debug\LocalMessagesApp.pdb
+C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesApp\obj\Debug\LocalMessagesApp.AppForm1.resources

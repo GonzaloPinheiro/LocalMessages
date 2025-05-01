@@ -13,7 +13,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace LocalMessagesApp
 {
-    public partial class Form1 : Form
+    public partial class AppForm1 : Form
     {
         Thread connection;
         Thread receptor;
@@ -22,11 +22,12 @@ namespace LocalMessagesApp
 
         string userName;
 
-        public Form1()
+        public AppForm1()
         {
             InitializeComponent();
         }
 
+        //Btn to connect to the server
         private void btnConection_Click(object sender, EventArgs e)
         {
             if (btnConection.Text == "Disconnect")
@@ -53,6 +54,7 @@ namespace LocalMessagesApp
         }
 
 
+        //Btn to send a message
         private void BtnSend_Click(object sender, EventArgs e)
         {
             if(tbxMessage.Text == "")
@@ -69,7 +71,7 @@ namespace LocalMessagesApp
 
 
 
-
+        //Try to connect to the server, if successful: launch thread to listen for messages
         private void Conect()
         {
             try
@@ -83,6 +85,10 @@ namespace LocalMessagesApp
                 });
 
                 MessageBox.Show("Connected");
+
+                //Lanzo un hilo para ponerlo en escucha por los mensajes del servidor
+                receptor = new Thread(reciveMessage);
+                receptor.Start();
             }
             catch (Exception ex)
             {
@@ -90,13 +96,9 @@ namespace LocalMessagesApp
                 MessageBox.Show("Connection error");
                 MessageBox.Show(ex.Message);
             }
-
-            //Lanzo un hilo para ponerlo en escucha por los mensajes del servidor
-            receptor = new Thread(reciveMessage);
-            receptor.Start();
-
         }
 
+        //Send message to the server
         private void sendMessage(string message)
         {
             try
