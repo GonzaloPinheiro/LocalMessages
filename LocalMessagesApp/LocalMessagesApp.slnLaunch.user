@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Nuevo perfil",
+    "Projects": [
+      {
+        "Path": "LocalMessagesApp\\LocalMessagesApp.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "..\\LocalMessagesServer\\LocalMessagesServer\\LocalMessagesServer.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

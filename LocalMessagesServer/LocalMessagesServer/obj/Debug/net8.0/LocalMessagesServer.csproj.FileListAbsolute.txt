@@ -1,0 +1,14 @@
+C:\GitHub\LocalMessages\LocalMessagesServer\LocalMessagesServer\bin\Debug\net8.0\LocalMessagesServer.exe
+C:\GitHub\LocalMessages\LocalMessagesServer\LocalMessagesServer\bin\Debug\net8.0\LocalMessagesServer.deps.json
+C:\GitHub\LocalMessages\LocalMessagesServer\LocalMessagesServer\bin\Debug\net8.0\LocalMessagesServer.runtimeconfig.json
+C:\GitHub\LocalMessages\LocalMessagesServer\LocalMessagesServer\bin\Debug\net8.0\LocalMessagesServer.dll
+C:\GitHub\LocalMessages\LocalMessagesServer\LocalMessagesServer\bin\Debug\net8.0\LocalMessagesServer.pdb
+C:\GitHub\LocalMessages\LocalMessagesServer\LocalMessagesServer\obj\Debug\net8.0\LocalMessagesServer.GeneratedMSBuildEditorConfig.editorconfig
+C:\GitHub\LocalMessages\LocalMessagesServer\LocalMessagesServer\obj\Debug\net8.0\LocalMessagesServer.AssemblyInfoInputs.cache
+C:\GitHub\LocalMessages\LocalMessagesServer\LocalMessagesServer\obj\Debug\net8.0\LocalMessagesServer.AssemblyInfo.cs
+C:\GitHub\LocalMessages\LocalMessagesServer\LocalMessagesServer\obj\Debug\net8.0\LocalMessagesServer.csproj.CoreCompileInputs.cache
+C:\GitHub\LocalMessages\LocalMessagesServer\LocalMessagesServer\obj\Debug\net8.0\LocalMessagesServer.dll
+C:\GitHub\LocalMessages\LocalMessagesServer\LocalMessagesServer\obj\Debug\net8.0\refint\LocalMessagesServer.dll
+C:\GitHub\LocalMessages\LocalMessagesServer\LocalMessagesServer\obj\Debug\net8.0\LocalMessagesServer.pdb
+C:\GitHub\LocalMessages\LocalMessagesServer\LocalMessagesServer\obj\Debug\net8.0\LocalMessagesServer.genruntimeconfig.cache
+C:\GitHub\LocalMessages\LocalMessagesServer\LocalMessagesServer\obj\Debug\net8.0\ref\LocalMessagesServer.dll
