@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LocalMessagesApp.Servicios;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,139 +16,68 @@ namespace LocalMessagesApp
 {
     public partial class AppForm1 : Form
     {
-        Thread connection;
-        Thread receptor;
-        TcpClient client = new TcpClient();
-
-
-        string userName;
+        private readonly ChatClient _chat = new ChatClient();
 
         public AppForm1()
         {
             InitializeComponent();
+
+            //Mostrar el mensaje recibido en el ListBox
+            _chat.OnMessageReceived += msg =>
+            {
+                //Invocar en el hilo de la UI para evitar cross-thread errors
+                Invoke((Action)(() => lbxChat.Items.Add(msg)));
+            };
+
+
+            // Mostrar el estado de la conexión
+            _chat.OnConnectionStatusChanged += connected =>
+            {
+                Invoke((Action)(() =>
+                {
+                    // Cambiar el texto del botón y mostrar notificación
+                    btnConection.Text = connected ? "Disconnect" : "Connect";
+                    MessageBox.Show(connected ? "Connected" : "Disconnected");
+                }));
+            };
         }
 
-        //Btn to connect to the server
-        private void btnConection_Click(object sender, EventArgs e)
+
+
+        // Botón Conectar/Desconectar
+        private async void btnConection_Click(object sender, EventArgs e)
         {
             if (btnConection.Text == "Disconnect")
             {
-                client.Close();
-                btnConection.Text = "Connect";
-                MessageBox.Show("Disconnected");
-                return;
+                _chat.Disconnect();
             }
             else
             {
-                if (tbxUserName.Text == "")
+                var nick = tbxUserName.Text.Trim();
+                if (string.IsNullOrEmpty(nick))
                 {
                     MessageBox.Show("Please enter a username");
                     return;
                 }
-                else
-                {
-                    userName = tbxUserName.Text;
-                    connection = new Thread(Conect);
-                    connection.Start();
-                }
+                // Conectar de forma asíncrona
+                await _chat.ConnectAsync("127.0.0.1", 1234, nick);
             }
         }
 
 
-        //Btn to send a message
-        private void BtnSend_Click(object sender, EventArgs e)
+
+        // Botón Enviar
+        private async void BtnSend_Click(object sender, EventArgs e)
         {
-            if(tbxMessage.Text == "")
+            var text = tbxMessage.Text.Trim();
+            if (string.IsNullOrEmpty(text))
             {
                 MessageBox.Show("Please enter a message");
                 return;
             }
-            else
-            {
-                sendMessage(tbxMessage.Text);
-                tbxMessage.Text = "";
-            }
+            // Enviar mensaje
+            await _chat.SendAsync(text);
+            tbxMessage.Clear();
         }
-
-
-
-        //Try to connect to the server, if successful: launch thread to listen for messages
-        private void Conect()
-        {
-            try
-            {
-                client.Connect("127.0.0.1", 1234);
-
-                sendMessage(userName);
-
-                this.Invoke((MethodInvoker)delegate {
-                    btnConection.Text = "Disconnect";
-                });
-
-                MessageBox.Show("Connected");
-
-                //Lanzo un hilo para ponerlo en escucha por los mensajes del servidor
-                receptor = new Thread(reciveMessage);
-                receptor.Start();
-            }
-            catch (Exception ex)
-            {
-                client.Dispose();
-                MessageBox.Show("Connection error");
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        //Send message to the server
-        private void sendMessage(string message)
-        {
-            try
-            {
-                Byte[] sendBytes = Encoding.ASCII.GetBytes(message);
-
-                client.GetStream().Write(sendBytes, 0, sendBytes.Length);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error sending message: " + ex.Message);
-            }
-        }
-
-        private void reciveMessage()
-        {
-            try
-            {
-                int longitudRespuesta;
-                string respuesta;
-                Byte[] bytesRecibidos = new Byte[256];
-
-                while (true)
-                {
-
-                    //Respuesta del servidor
-                    longitudRespuesta = client.GetStream().Read(bytesRecibidos, 0, bytesRecibidos.Length);
-                    respuesta = Encoding.ASCII.GetString(bytesRecibidos, 0, bytesRecibidos.Length);
-
-                    if (longitudRespuesta > 0)
-                    {
-                        //Convertir los bytes a un string
-                        string mensaje = Encoding.ASCII.GetString(bytesRecibidos, 0, longitudRespuesta);
-
-                        //Actualizar el TextBox en el hilo principal
-                        this.Invoke((MethodInvoker)delegate
-                        {
-                            lbxChat.Items.Add(mensaje);
-                        });
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Conexión perdida: " + ex.Message);
-                client.Close();
-            }
-        }
-
-
     }
 }

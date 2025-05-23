@@ -35,7 +35,7 @@ class Server
     }
 
 
-    // Method to launch the server
+    // Método para lanzar el servidor
     static void launchServer()
     {
         TcpListener escuchaTcp;
@@ -50,7 +50,7 @@ class Server
             Console.WriteLine("Waiting for connections...\n");
 
 
-            //Listening for connections
+            //Escuchando conexiones
             while (true)
             {
                 TcpClient clientTcp = escuchaTcp.AcceptTcpClient();
@@ -71,7 +71,7 @@ class Server
                 Console.WriteLine("Conexión aceptada desde " + clientTcp.Client.RemoteEndPoint);
 
 
-                //Launching a thread for the new client
+                //Lanzo un hilo para atender al cliente
                 Thread clienteThread = new Thread(() => HiloCliente(clientTcp, clienteNuevo));
                 clienteThread.Start();
             }
@@ -82,7 +82,7 @@ class Server
         }
     }
 
-    // Manager for the client thread
+    // Manager para cada cliente
     static void HiloCliente(TcpClient tcpClient, Client client)
     {
         try
@@ -138,7 +138,7 @@ class Server
         }
     }
 
-    // Send message to all clients
+    // Mandar mensaje a todos los clientes
     static void sendMessage(string mensaje, TcpClient emisor)
     {
         lock (conectedClients)
