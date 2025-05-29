@@ -35,17 +35,17 @@ namespace LocalMessagesApp.Servicios
             OnConnectionStatusChanged?.Invoke(true);
 
             //Enviar el nombre de usuario
-            await SendAsync(username);
+            await EnviarMensaje(username);
 
             //Variable discard, no se va a usar. Solo la uso para lanzar el task.
-            _ = Task.Run(ReciveLoop, _cts.Token);
+            _ = Task.Run(RecibirLoop, _cts.Token);
         }
 
 
         /// <summary>
         /// Envía un texto al servidor de forma asíncrona.
         /// </summary>
-        public async Task SendAsync(string mensaje)
+        public async Task EnviarMensaje(string mensaje)
         {
             var data = Encoding.UTF8.GetBytes(mensaje);
             await _tcp.GetStream().WriteAsync(data, 0, data.Length);
@@ -56,7 +56,7 @@ namespace LocalMessagesApp.Servicios
         /// Bucle que permanece leyendo datos del servidor
         /// hasta que se cancele o se cierre la conexión.
         /// </summary>
-        private async Task ReciveLoop()
+        private async Task RecibirLoop()
         {
             var buffer = new byte[4096];
             try
@@ -77,11 +77,13 @@ namespace LocalMessagesApp.Servicios
             }
             finally
             {
-                Disconnect();
+                DesconectarCliente();
             }
         }
 
-        public void Disconnect()
+
+        //Desconecta el cliente y cancela el token de cancelación.
+        public void DesconectarCliente()
         {
             _cts?.Cancel();
             _tcp?.Close();

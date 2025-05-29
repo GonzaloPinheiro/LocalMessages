@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LocalMessagesServer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ba5194d8a365745c50498b8a5caf8f7551bea8df")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+942cbc01c2af932e37114d3d1fdbc13314175092")]
 [assembly: System.Reflection.AssemblyProductAttribute("LocalMessagesServer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LocalMessagesServer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

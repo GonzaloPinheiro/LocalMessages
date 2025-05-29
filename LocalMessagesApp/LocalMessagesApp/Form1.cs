@@ -36,8 +36,8 @@ namespace LocalMessagesApp
                 Invoke((Action)(() =>
                 {
                     // Cambiar el texto del botón y mostrar notificación
-                    btnConection.Text = connected ? "Disconnect" : "Connect";
-                    MessageBox.Show(connected ? "Connected" : "Disconnected");
+                    btnConection.Text = connected ? "Desconectar" : "Conectar";
+                    MessageBox.Show(connected ? "Conectado" : "Desconectado");
                 }));
             };
         }
@@ -47,16 +47,16 @@ namespace LocalMessagesApp
         // Botón Conectar/Desconectar
         private async void btnConection_Click(object sender, EventArgs e)
         {
-            if (btnConection.Text == "Disconnect")
+            if (btnConection.Text == "Desconectarse")
             {
-                _chat.Disconnect();
+                _chat.DesconectarCliente();
             }
             else
             {
                 var nick = tbxUserName.Text.Trim();
                 if (string.IsNullOrEmpty(nick))
                 {
-                    MessageBox.Show("Please enter a username");
+                    MessageBox.Show("Porfavor introduzca un nombre de usuario");
                     return;
                 }
                 // Conectar de forma asíncrona
@@ -72,12 +72,14 @@ namespace LocalMessagesApp
             var text = tbxMessage.Text.Trim();
             if (string.IsNullOrEmpty(text))
             {
-                MessageBox.Show("Please enter a message");
+                MessageBox.Show("Por favor introduzca un mensaje");
                 return;
             }
-            // Enviar mensaje
-            await _chat.SendAsync(text);
+
+            // Procesar la entrada del usuario y comrueba si es mensaje o comando
+            await ProcesarEntrada(text);
             tbxMessage.Clear();
+            tbxMessage.Focus();
         }
     }
 }
