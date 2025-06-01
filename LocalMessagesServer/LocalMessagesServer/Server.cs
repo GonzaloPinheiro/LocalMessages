@@ -1,4 +1,7 @@
-﻿using System.Net;
+﻿using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Net;
+using System.Net.Http;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -6,9 +9,18 @@ using System.Text;
 
 class Server
 {
-    static List<Client> conectedClients = new List<Client>();
+    //static List<Client> conectedClients = new List<Client>();
+    static ObservableCollection<Client> conectedClients = new ObservableCollection<Client>();
     static Thread serverThread;
     static bool activeServer = false;
+
+    static TcpClient tcpCiente;
+
+    static Server()
+    {
+        // 2) Nos subscribimos al evento CollectionChanged
+        conectedClients.CollectionChanged += ConectedClients_CollectionChanged;
+    }
 
     static void Main(string[] args)
     {
@@ -53,12 +65,13 @@ class Server
             //Escuchando conexiones
             while (true)
             {
-                TcpClient clientTcp = escuchaTcp.AcceptTcpClient();
+                //TcpClient clientTcp = escuchaTcp.AcceptTcpClient();
+                tcpCiente = escuchaTcp.AcceptTcpClient();
 
                 Client clienteNuevo = new Client
                 {
                     clientName = "",
-                    tcpClient = clientTcp
+                    tcpClient = tcpCiente
                 };
 
 
@@ -68,11 +81,11 @@ class Server
                     conectedClients.Add(clienteNuevo);
                 }
 
-                Console.WriteLine("Conexión aceptada desde " + clientTcp.Client.RemoteEndPoint);
+                Console.WriteLine("Conexión aceptada desde " + tcpCiente.Client.RemoteEndPoint);
 
 
                 //Lanzo un hilo para atender al cliente
-                Thread clienteThread = new Thread(() => HiloCliente(clientTcp, clienteNuevo));
+                Thread clienteThread = new Thread(() => HiloCliente(tcpCiente, clienteNuevo));
                 clienteThread.Start();
             }
         }
@@ -96,6 +109,9 @@ class Server
 
             //Notificación de cliente conectado a todos los demás clientes
             sendMessageButEmitter($"El usuario {client.clientName} se ha conectado.", tcpClient);
+
+            //Envio la lista con todos los nombres de los clientes
+            sendMessage(generadorListaClientes());
 
             lock (conectedClients)
             {
@@ -136,19 +152,25 @@ class Server
 
 
                     string clientText = $"{client.clientName}: {mensaje}";
-                    sendMessage(clientText, tcpClient);
+                    sendMessage(clientText);
                 }
                 
             }
 
+            //Salgo del while = este cliente se ha desconectado
+
             tcpClient.Close();
             Console.WriteLine($"Cliente desconectado: {client.clientName}");
             sendMessageButEmitter($"El usuario {client.clientName} se ha desconectado.", tcpClient);
-
+            
+            //Lo elimino de la lista de clietes
             lock (conectedClients)
             {
                 conectedClients.Remove(client);
             }
+
+            //Envio la lista actualizada de los clientes conectados
+            sendMessage(generadorListaClientes());
         }
         catch (Exception e)
         {
@@ -157,6 +179,8 @@ class Server
         }
     }
 
+
+    //Se encarga de procesar los mensajes recibidos que empiezan por "CMD|"
     private static void ProcesarComando(string mensaje, TcpClient tcpClient, Client client)
     {
         // Estructura: "CMD|<comando>|<arg1>|<arg2>|..."
@@ -193,14 +217,18 @@ class Server
                     tcpClient.Client.Send(Encoding.ASCII.GetBytes(listaUsuarios));
                 }
                 break;
+
+            //Comando no reconocido
             default:
                 Console.WriteLine("Comando no reconocido: " + comando);
                 break;
         }
     }
 
+
+    //NOTA: Revisar si el argumento TcpClient sobra, 
     // Mandar mensaje a todos los clientes
-    static void sendMessage(string mensaje, TcpClient emisor)
+    static void sendMessage(string mensaje)
     {
         lock (conectedClients)
         {
@@ -265,6 +293,47 @@ class Server
                 }
             }
         }
+    }
+
+
+
+
+
+    //Manejador del evento CollectionChanged de lista conectedClients
+    private static void ConectedClients_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        // Detecta si se modifico la lista
+        //if (e.Action == NotifyCollectionChangedAction.Add)
+        //{
+        //    foreach (Client nuevo in e.NewItems!)
+        //    {
+        //        Console.WriteLine($"[Evento] Cliente agregado: {nuevo.clientName ?? "(aún sin nombre)"}");
+        //        sendMessage(generadorListaClientes(), tcpCiente);
+        //        // Aquí podría notificar a los clienetes del cliente conectado
+        //    }
+        //}
+        //else if (e.Action == NotifyCollectionChangedAction.Remove)
+        //{
+        //    foreach (Client viejo in e.OldItems!)
+        //    {
+        //        Console.WriteLine($"[Evento] Cliente eliminado: {viejo.clientName}");
+        //        sendMessage(generadorListaClientes(), tcpCiente);
+        //        // Aquí podría notificar a los clienetes del cliente desconectado
+        //    }
+        //}
+        //NOTA: También se puede manejar Replace, Move, Reset, etc.
+    }
+
+    //Genera el comando a enviar con la lita de clientes
+    private static string generadorListaClientes()
+    {
+        string listaUsuarios;
+        lock (conectedClients)
+        {
+            listaUsuarios = "CMD|list|" + string.Join("|", conectedClients.Select(c => c.clientName));
+        }
+
+        return listaUsuarios;
     }
 
 }

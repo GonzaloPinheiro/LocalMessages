@@ -45,7 +45,7 @@
             this.btnConection.Name = "btnConection";
             this.btnConection.Size = new System.Drawing.Size(96, 32);
             this.btnConection.TabIndex = 0;
-            this.btnConection.Text = "Connect";
+            this.btnConection.Text = "Conectar";
             this.btnConection.UseVisualStyleBackColor = true;
             this.btnConection.Click += new System.EventHandler(this.btnConection_Click);
             // 
@@ -76,7 +76,7 @@
             this.BtnSend.Name = "BtnSend";
             this.BtnSend.Size = new System.Drawing.Size(120, 23);
             this.BtnSend.TabIndex = 4;
-            this.BtnSend.Text = "Send";
+            this.BtnSend.Text = "Enviar";
             this.BtnSend.UseVisualStyleBackColor = true;
             this.BtnSend.Click += new System.EventHandler(this.BtnSend_Click);
             // 
@@ -85,18 +85,18 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(189, 478);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 16);
+            this.label1.Size = new System.Drawing.Size(66, 16);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Receiver:";
+            this.label1.Text = "Receptor:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(295, 478);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 16);
+            this.label2.Size = new System.Drawing.Size(59, 16);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Message";
+            this.label2.Text = "Mensaje";
             // 
             // lbxUssers
             // 

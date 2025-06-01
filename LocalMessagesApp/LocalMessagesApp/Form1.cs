@@ -22,11 +22,32 @@ namespace LocalMessagesApp
         {
             InitializeComponent();
 
-            //Mostrar el mensaje recibido en el ListBox
+
+            //Gestiona el mensaje o comando recibido
             _chat.OnMessageReceived += msg =>
             {
-                //Invocar en el hilo de la UI para evitar cross-thread errors
-                Invoke((Action)(() => lbxChat.Items.Add(msg)));
+                if (msg.StartsWith("CMD|")) //Comando
+                {
+                    var partes = msg.Split('|', (char)StringSplitOptions.RemoveEmptyEntries);
+                    string comando = partes[1].ToLower();
+                    var nombres = partes.Skip(2).ToArray();
+
+                    if (comando.Equals("list"))
+                    {
+                        Invoke((Action)(() => lbxUssers.Items.Clear()));
+
+                        foreach (var nombre in nombres)
+                        {
+                            Invoke((Action)(() => lbxUssers.Items.Add(nombre)));
+                        }
+                    }
+                    
+                }
+                else //Mensaje normal
+                {
+                    //Invocar en el hilo de la UI para evitar cross-thread errors
+                    Invoke((Action)(() => lbxChat.Items.Add(msg)));
+                }                   
             };
 
 
@@ -43,11 +64,10 @@ namespace LocalMessagesApp
         }
 
 
-
         // Botón Conectar/Desconectar
         private async void btnConection_Click(object sender, EventArgs e)
         {
-            if (btnConection.Text == "Desconectarse")
+            if (btnConection.Text == "Desconectar")
             {
                 _chat.DesconectarCliente();
             }
