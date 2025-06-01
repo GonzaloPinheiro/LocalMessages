@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{75AB9ACF-464E-4A30-96EC-97B7E2F7E01F}|LocalMessagesApp\\LocalMessagesApp.csproj|solutionrelative:localmessagesapp\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{75AB9ACF-464E-4A30-96EC-97B7E2F7E01F}|LocalMessagesApp\\LocalMessagesApp.csproj|C:\\GitHub\\LocalMessages\\LocalMessagesApp\\localmessagesapp\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{75AB9ACF-464E-4A30-96EC-97B7E2F7E01F}|LocalMessagesApp\\LocalMessagesApp.csproj|solutionrelative:localmessagesapp\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{75AB9ACF-464E-4A30-96EC-97B7E2F7E01F}|LocalMessagesApp\\LocalMessagesApp.csproj|C:\\GitHub\\LocalMessages\\LocalMessagesApp\\localmessagesapp\\servicios\\chatclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{75AB9ACF-464E-4A30-96EC-97B7E2F7E01F}|LocalMessagesApp\\LocalMessagesApp.csproj|solutionrelative:localmessagesapp\\servicios\\chatclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -16,10 +20,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{75AB9ACF-464E-4A30-96EC-97B7E2F7E01F}|LocalMessagesApp\\LocalMessagesApp.csproj|C:\\GitHub\\LocalMessages\\LocalMessagesApp\\localmessagesapp\\form1.comands.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{75AB9ACF-464E-4A30-96EC-97B7E2F7E01F}|LocalMessagesApp\\LocalMessagesApp.csproj|solutionrelative:localmessagesapp\\form1.comands.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{75AB9ACF-464E-4A30-96EC-97B7E2F7E01F}|LocalMessagesApp\\LocalMessagesApp.csproj|C:\\GitHub\\LocalMessages\\LocalMessagesApp\\localmessagesapp\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{75AB9ACF-464E-4A30-96EC-97B7E2F7E01F}|LocalMessagesApp\\LocalMessagesApp.csproj|solutionrelative:localmessagesapp\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -33,7 +33,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "Form1.cs [Dise\u00F1o]",
               "DocumentMoniker": "C:\\GitHub\\LocalMessages\\LocalMessagesApp\\LocalMessagesApp\\Form1.cs",
               "RelativeDocumentMoniker": "LocalMessagesApp\\Form1.cs",
@@ -52,7 +52,7 @@
               "RelativeDocumentMoniker": "LocalMessagesApp\\Form1.cs",
               "ToolTip": "C:\\GitHub\\LocalMessages\\LocalMessagesApp\\LocalMessagesApp\\Form1.cs",
               "RelativeToolTip": "LocalMessagesApp\\Form1.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAApwCkAAABIAAAAAAAAAA==",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAAwBMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-01T11:55:02.536Z",
               "IsPinned": true,
@@ -60,7 +60,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "ChatClient.cs",
               "DocumentMoniker": "C:\\GitHub\\LocalMessages\\LocalMessagesApp\\LocalMessagesApp\\Servicios\\ChatClient.cs",
               "RelativeDocumentMoniker": "LocalMessagesApp\\Servicios\\ChatClient.cs",
@@ -74,7 +74,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Form1.Comands.cs",
               "DocumentMoniker": "C:\\GitHub\\LocalMessages\\LocalMessagesApp\\LocalMessagesApp\\Form1.Comands.cs",
               "RelativeDocumentMoniker": "LocalMessagesApp\\Form1.Comands.cs",
@@ -88,7 +88,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Server.cs",
               "DocumentMoniker": "C:\\GitHub\\LocalMessages\\LocalMessagesServer\\LocalMessagesServer\\Server.cs",
               "RelativeDocumentMoniker": "..\\LocalMessagesServer\\LocalMessagesServer\\Server.cs",
@@ -99,6 +99,10 @@
               "WhenOpened": "2025-05-01T11:41:08.625Z",
               "IsPinned": true,
               "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             }
           ]
         }
