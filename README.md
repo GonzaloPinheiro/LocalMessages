@@ -16,8 +16,8 @@
 
 ## ✨ Por qué hice esto
 
-* **Aprender C# y .NET**: Experimento con sockets, bases de datos, seguridad y más.
-* **Jugar con diferentes transportes**: TCP, WebSockets y quién sabe, ¡igual SignalR o gRPC más adelante!
+* **Aprender C# y .NET**: Experimento con sockets, bases de datos, programación asíncrona, seguridad y más.
+* **Jugar con diferentes transportes**: TCP, WebSockets o similares.
 * **Mantenerlo modular**: Añadir piezas nuevas sin romper lo que ya funciona.
 
 ---
