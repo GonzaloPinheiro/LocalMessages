@@ -25,9 +25,8 @@
 ## ⚡ Cómo arrancar
 
 ```bash
-# 1. Clona este repo
-git clone https://github.com/tuusuario/ChatCSharp.git
-cd ChatCSharp
+# 1. Clona la versión que quieras ver
+#    Tienes las difrentes versiones en los tags
 
 # 2. Abre la solución en Visual Studio 2022+
 # 3. Ejecuta el servidor de consola:
