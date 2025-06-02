@@ -27,7 +27,6 @@
 ```bash
 # 1. Clona la versión que quieras ver
 #    Tienes las difrentes versiones en los tags
-
 # 2. Abre la solución en Visual Studio 2022+
 # 3. Ejecuta el servidor de consola:
 #    Ve a src/Server y dale a "Iniciar".
