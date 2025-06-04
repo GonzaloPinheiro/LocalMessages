@@ -3,31 +3,26 @@
   "WorkspaceRootPath": "C:\\GitHub\\LocalMessages\\LocalMessagesApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{75AB9ACF-464E-4A30-96EC-97B7E2F7E01F}|LocalMessagesApp\\LocalMessagesApp.csproj|c:\\github\\localmessages\\localmessagesapp\\localmessagesapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{75AB9ACF-464E-4A30-96EC-97B7E2F7E01F}|LocalMessagesApp\\LocalMessagesApp.csproj|solutionrelative:localmessagesapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|LocalMessagesApp||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{75AB9ACF-464E-4A30-96EC-97B7E2F7E01F}|LocalMessagesApp\\LocalMessagesApp.csproj|c:\\github\\localmessages\\localmessagesapp\\localmessagesapp\\views\\formchat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{75AB9ACF-464E-4A30-96EC-97B7E2F7E01F}|LocalMessagesApp\\LocalMessagesApp.csproj|solutionrelative:localmessagesapp\\views\\formchat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|LocalMessagesCore||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{75AB9ACF-464E-4A30-96EC-97B7E2F7E01F}|LocalMessagesApp\\LocalMessagesApp.csproj|c:\\github\\localmessages\\localmessagesapp\\localmessagesapp\\views\\formchat.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{75AB9ACF-464E-4A30-96EC-97B7E2F7E01F}|LocalMessagesApp\\LocalMessagesApp.csproj|solutionrelative:localmessagesapp\\views\\formchat.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|LocalMessagesServidor||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{75AB9ACF-464E-4A30-96EC-97B7E2F7E01F}|LocalMessagesApp\\LocalMessagesApp.csproj|c:\\github\\localmessages\\localmessagesapp\\localmessagesapp\\views\\formchat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{75AB9ACF-464E-4A30-96EC-97B7E2F7E01F}|LocalMessagesApp\\LocalMessagesApp.csproj|solutionrelative:localmessagesapp\\views\\formchat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F8DC7792-A7B2-49B7-8F84-EB71C3C5C4C6}|LocalMessagesServidor\\LocalMessagesServidor.csproj|c:\\github\\localmessages\\localmessagesapp\\localmessagesservidor\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8DC7792-A7B2-49B7-8F84-EB71C3C5C4C6}|LocalMessagesServidor\\LocalMessagesServidor.csproj|solutionrelative:localmessagesservidor\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{75AB9ACF-464E-4A30-96EC-97B7E2F7E01F}|LocalMessagesApp\\LocalMessagesApp.csproj|C:\\GitHub\\LocalMessages\\LocalMessagesApp\\localmessagesapp\\servicios\\chatclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{75AB9ACF-464E-4A30-96EC-97B7E2F7E01F}|LocalMessagesApp\\LocalMessagesApp.csproj|solutionrelative:localmessagesapp\\servicios\\chatclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F8DC7792-A7B2-49B7-8F84-EB71C3C5C4C6}|LocalMessagesServidor\\LocalMessagesServidor.csproj|c:\\github\\localmessages\\localmessagesapp\\localmessagesservidor\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|5e9a8ac2-4f34-4521-858f-4c248ba31532"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{75AB9ACF-464E-4A30-96EC-97B7E2F7E01F}|LocalMessagesApp\\LocalMessagesApp.csproj|c:\\github\\localmessages\\localmessagesapp\\localmessagesapp\\views\\form1chatcomands.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{75AB9ACF-464E-4A30-96EC-97B7E2F7E01F}|LocalMessagesApp\\LocalMessagesApp.csproj|solutionrelative:localmessagesapp\\views\\form1chatcomands.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5E7648E2-6BF8-4159-A325-2C9B7A922260}|LocalMessagesCore\\LocalMessagesCore.csproj|c:\\github\\localmessages\\localmessagesapp\\localmessagescore\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|5e9a8ac2-4f34-4521-858f-4c248ba31532"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E606F21C-F323-4283-A1B3-C6FB78BDA518}|..\\LocalMessagesServer\\LocalMessagesServer\\LocalMessagesServer.csproj|c:\\github\\localmessages\\localmessagesserver\\localmessagesserver\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{75AB9ACF-464E-4A30-96EC-97B7E2F7E01F}|LocalMessagesApp\\LocalMessagesApp.csproj|c:\\github\\localmessages\\localmessagesapp\\localmessagesapp\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|5e9a8ac2-4f34-4521-858f-4c248ba31532"
     }
   ],
   "DocumentGroupContainers": [
@@ -37,104 +32,59 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FormChat.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\GitHub\\LocalMessages\\LocalMessagesApp\\LocalMessagesApp\\Views\\FormChat.cs",
-              "RelativeDocumentMoniker": "LocalMessagesApp\\Views\\FormChat.cs",
-              "ToolTip": "C:\\GitHub\\LocalMessages\\LocalMessagesApp\\LocalMessagesApp\\Views\\FormChat.cs [Dise\u00F1o]",
-              "RelativeToolTip": "LocalMessagesApp\\Views\\FormChat.cs [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T15:37:11.338Z",
-              "IsPinned": true,
-              "EditorCaption": " [Dise\u00F1o]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "FormChat.cs",
-              "DocumentMoniker": "C:\\GitHub\\LocalMessages\\LocalMessagesApp\\LocalMessagesApp\\Views\\FormChat.cs",
-              "RelativeDocumentMoniker": "LocalMessagesApp\\Views\\FormChat.cs",
-              "ToolTip": "C:\\GitHub\\LocalMessages\\LocalMessagesApp\\LocalMessagesApp\\Views\\FormChat.cs",
-              "RelativeToolTip": "LocalMessagesApp\\Views\\FormChat.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABgAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T11:55:02.536Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ChatClient.cs",
-              "DocumentMoniker": "C:\\GitHub\\LocalMessages\\LocalMessagesApp\\LocalMessagesApp\\Servicios\\ChatClient.cs",
-              "RelativeDocumentMoniker": "LocalMessagesApp\\Servicios\\ChatClient.cs",
-              "ToolTip": "C:\\GitHub\\LocalMessages\\LocalMessagesApp\\LocalMessagesApp\\Servicios\\ChatClient.cs",
-              "RelativeToolTip": "LocalMessagesApp\\Servicios\\ChatClient.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEoAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T11:30:38.26Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Server.cs",
-              "DocumentMoniker": "C:\\GitHub\\LocalMessages\\LocalMessagesServer\\LocalMessagesServer\\Server.cs",
-              "RelativeDocumentMoniker": "..\\LocalMessagesServer\\LocalMessagesServer\\Server.cs",
-              "ToolTip": "C:\\GitHub\\LocalMessages\\LocalMessagesServer\\LocalMessagesServer\\Server.cs",
-              "RelativeToolTip": "..\\LocalMessagesServer\\LocalMessagesServer\\Server.cs",
-              "ViewState": "AgIAAJcAAAAAAAAAAAAUwKUAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T11:41:08.625Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "FormChat.Designer.cs",
-              "DocumentMoniker": "C:\\GitHub\\LocalMessages\\LocalMessagesApp\\LocalMessagesApp\\Views\\FormChat.Designer.cs",
-              "RelativeDocumentMoniker": "LocalMessagesApp\\Views\\FormChat.Designer.cs",
-              "ToolTip": "C:\\GitHub\\LocalMessages\\LocalMessagesApp\\LocalMessagesApp\\Views\\FormChat.Designer.cs",
-              "RelativeToolTip": "LocalMessagesApp\\Views\\FormChat.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAD4vxwAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T16:55:59.693Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\GitHub\\LocalMessages\\LocalMessagesApp\\LocalMessagesApp\\Program.cs",
-              "RelativeDocumentMoniker": "LocalMessagesApp\\Program.cs",
-              "ToolTip": "C:\\GitHub\\LocalMessages\\LocalMessagesApp\\LocalMessagesApp\\Program.cs",
-              "RelativeToolTip": "LocalMessagesApp\\Program.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAowA8AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T16:56:22.766Z",
+              "Title": "LocalMessagesApp",
+              "DocumentMoniker": "C:\\GitHub\\LocalMessages\\LocalMessagesApp\\LocalMessagesApp\\LocalMessagesApp.csproj",
+              "RelativeDocumentMoniker": "LocalMessagesApp\\LocalMessagesApp.csproj",
+              "ToolTip": "C:\\GitHub\\LocalMessages\\LocalMessagesApp\\LocalMessagesApp\\LocalMessagesApp.csproj",
+              "RelativeToolTip": "LocalMessagesApp\\LocalMessagesApp.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-06-04T17:58:06.795Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Form1ChatComands.cs",
-              "DocumentMoniker": "C:\\GitHub\\LocalMessages\\LocalMessagesApp\\LocalMessagesApp\\Views\\Form1ChatComands.cs",
-              "RelativeDocumentMoniker": "LocalMessagesApp\\Views\\Form1ChatComands.cs",
-              "ToolTip": "C:\\GitHub\\LocalMessages\\LocalMessagesApp\\LocalMessagesApp\\Views\\Form1ChatComands.cs",
-              "RelativeToolTip": "LocalMessagesApp\\Views\\Form1ChatComands.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwBUAAAAZAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "LocalMessagesCore",
+              "DocumentMoniker": "C:\\GitHub\\LocalMessages\\LocalMessagesApp\\LocalMessagesCore\\LocalMessagesCore.csproj",
+              "RelativeDocumentMoniker": "LocalMessagesCore\\LocalMessagesCore.csproj",
+              "ToolTip": "C:\\GitHub\\LocalMessages\\LocalMessagesApp\\LocalMessagesCore\\LocalMessagesCore.csproj",
+              "RelativeToolTip": "LocalMessagesCore\\LocalMessagesCore.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-06-04T17:58:04.102Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LocalMessagesServidor",
+              "DocumentMoniker": "C:\\GitHub\\LocalMessages\\LocalMessagesApp\\LocalMessagesServidor\\LocalMessagesServidor.csproj",
+              "RelativeDocumentMoniker": "LocalMessagesServidor\\LocalMessagesServidor.csproj",
+              "ToolTip": "C:\\GitHub\\LocalMessages\\LocalMessagesApp\\LocalMessagesServidor\\LocalMessagesServidor.csproj",
+              "RelativeToolTip": "LocalMessagesServidor\\LocalMessagesServidor.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-06-04T17:58:01.09Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\GitHub\\LocalMessages\\LocalMessagesApp\\LocalMessagesServidor\\Program.cs",
+              "RelativeDocumentMoniker": "LocalMessagesServidor\\Program.cs",
+              "ToolTip": "C:\\GitHub\\LocalMessages\\LocalMessagesApp\\LocalMessagesServidor\\Program.cs",
+              "RelativeToolTip": "LocalMessagesServidor\\Program.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAAwCsAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T16:48:15.709Z",
+              "WhenOpened": "2025-06-04T17:49:27.24Z",
               "EditorCaption": ""
             }
           ]

@@ -1,0 +1,8 @@
+C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesServidor\bin\Debug\LocalMessagesServidor.exe.config
+C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesServidor\bin\Debug\LocalMessagesServidor.exe
+C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesServidor\bin\Debug\LocalMessagesServidor.pdb
+C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesServidor\obj\Debug\LocalMessagesServidor.csproj.AssemblyReference.cache
+C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesServidor\obj\Debug\LocalMessagesServidor.csproj.CoreCompileInputs.cache
+C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesServidor\obj\Debug\LocalMessagesServidor.exe
+C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesServidor\obj\Debug\LocalMessagesServidor.pdb
+C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesServidor\obj\Debug\LocalMessagesServidor.exe.config
