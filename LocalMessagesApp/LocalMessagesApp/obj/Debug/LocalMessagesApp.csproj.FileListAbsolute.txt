@@ -7,4 +7,5 @@ C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesApp\obj\Debug\LocalMessage
 C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesApp\obj\Debug\LocalMessagesApp.csproj.CoreCompileInputs.cache
 C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesApp\obj\Debug\LocalMessagesApp.exe
 C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesApp\obj\Debug\LocalMessagesApp.pdb
-C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesApp\obj\Debug\LocalMessagesApp.AppForm1.resources
+C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesApp\obj\Debug\LocalMessagesApp.exe.config
+C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesApp\obj\Debug\LocalMessagesApp.Views.FormChat.resources

@@ -16,7 +16,7 @@ namespace LocalMessagesApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AppForm1());
+            Application.Run(new Views.FormChat());
         }
     }
 }

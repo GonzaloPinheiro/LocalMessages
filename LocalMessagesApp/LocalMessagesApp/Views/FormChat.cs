@@ -14,13 +14,13 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 //V2.0
-namespace LocalMessagesApp
+namespace LocalMessagesApp.Views
 {
-    public partial class AppForm1 : Form
+    public partial class FormChat : Form
     {
         private readonly ChatClient _chat = new ChatClient();
 
-        public AppForm1()
+        public FormChat()
         {
             InitializeComponent();
 

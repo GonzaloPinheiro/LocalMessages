@@ -1,16 +1,14 @@
-﻿using LocalMessagesApp.Servicios;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LocalMessagesApp
+namespace LocalMessagesApp.Views
 {
-
     //Partial class para manejar los comandos del chat del usuario
-    public partial class AppForm1 : Form
+    public partial class FormChat : Form
     {
         private async Task ProcesarEntrada(string texto)
         {
@@ -21,7 +19,7 @@ namespace LocalMessagesApp
             }
             else //No es comando
             {
-                await _chat.EnviarMensaje(texto);
+                await _chat.EnviarMensaje(texto); 
             }
         }
 
@@ -67,7 +65,7 @@ namespace LocalMessagesApp
                 return;
             }
             var nuevoNombre = args[0];
-            
+
             await _chat.EnviarMensaje($"CMD|nick|{nuevoNombre}");
         }
 
@@ -80,7 +78,7 @@ namespace LocalMessagesApp
         //Comando para conectarse al servidor
         private async Task CmdConectar(string[] args)
         {
-            if(args.Length != 1)
+            if (args.Length != 1)
             {
                 MessageBox.Show("Estructura  correcta: /connect <nombre>");
                 return;
