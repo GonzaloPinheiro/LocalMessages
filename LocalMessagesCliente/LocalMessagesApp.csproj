@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Servicios\TcpTransport.cs" />
     <Compile Include="Views\FormChat.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,7 +56,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicios\ChatClient.cs" />
-    <Compile Include="Views\Form1ChatComands.cs">
+    <Compile Include="Views\FormChatComands.cs">
       <SubType>Form</SubType>
     </Compile>
     <EmbeddedResource Include="Views\FormChat.resx">
@@ -82,6 +83,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LocalMessagesCore\LocalMessagesCore.csproj">
+      <Project>{5e7648e2-6bf8-4159-a325-2c9b7a922260}</Project>
+      <Name>LocalMessagesCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

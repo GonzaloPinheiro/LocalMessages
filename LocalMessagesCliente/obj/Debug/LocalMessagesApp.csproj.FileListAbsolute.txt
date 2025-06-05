@@ -9,3 +9,14 @@ C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesApp\obj\Debug\LocalMessage
 C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesApp\obj\Debug\LocalMessagesApp.pdb
 C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesApp\obj\Debug\LocalMessagesApp.exe.config
 C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesApp\obj\Debug\LocalMessagesApp.Views.FormChat.resources
+C:\GitHub\LocalMessages\LocalMessagesCliente\bin\Debug\LocalMessagesApp.exe.config
+C:\GitHub\LocalMessages\LocalMessagesCliente\bin\Debug\LocalMessagesApp.exe
+C:\GitHub\LocalMessages\LocalMessagesCliente\bin\Debug\LocalMessagesApp.pdb
+C:\GitHub\LocalMessages\LocalMessagesCliente\obj\Debug\LocalMessagesApp.csproj.AssemblyReference.cache
+C:\GitHub\LocalMessages\LocalMessagesCliente\obj\Debug\LocalMessagesApp.exe.config
+C:\GitHub\LocalMessages\LocalMessagesCliente\obj\Debug\LocalMessagesApp.Views.FormChat.resources
+C:\GitHub\LocalMessages\LocalMessagesCliente\obj\Debug\LocalMessagesApp.Properties.Resources.resources
+C:\GitHub\LocalMessages\LocalMessagesCliente\obj\Debug\LocalMessagesApp.csproj.GenerateResource.cache
+C:\GitHub\LocalMessages\LocalMessagesCliente\obj\Debug\LocalMessagesApp.csproj.CoreCompileInputs.cache
+C:\GitHub\LocalMessages\LocalMessagesCliente\obj\Debug\LocalMessagesApp.exe
+C:\GitHub\LocalMessages\LocalMessagesCliente\obj\Debug\LocalMessagesApp.pdb
