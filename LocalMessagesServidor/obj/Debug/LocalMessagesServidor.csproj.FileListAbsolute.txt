@@ -6,3 +6,14 @@ C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesServidor\obj\Debug\LocalMe
 C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesServidor\obj\Debug\LocalMessagesServidor.exe
 C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesServidor\obj\Debug\LocalMessagesServidor.pdb
 C:\GitHub\LocalMessages\LocalMessagesApp\LocalMessagesServidor\obj\Debug\LocalMessagesServidor.exe.config
+C:\GitHub\LocalMessages\LocalMessagesServidor\bin\Debug\LocalMessagesServidor.exe.config
+C:\GitHub\LocalMessages\LocalMessagesServidor\bin\Debug\LocalMessagesServidor.exe
+C:\GitHub\LocalMessages\LocalMessagesServidor\bin\Debug\LocalMessagesServidor.pdb
+C:\GitHub\LocalMessages\LocalMessagesServidor\bin\Debug\LocalMessagesCore.dll
+C:\GitHub\LocalMessages\LocalMessagesServidor\bin\Debug\LocalMessagesCore.pdb
+C:\GitHub\LocalMessages\LocalMessagesServidor\obj\Debug\LocalMessagesServidor.csproj.AssemblyReference.cache
+C:\GitHub\LocalMessages\LocalMessagesServidor\obj\Debug\LocalMessagesServidor.exe.config
+C:\GitHub\LocalMessages\LocalMessagesServidor\obj\Debug\LocalMessagesServidor.csproj.CoreCompileInputs.cache
+C:\GitHub\LocalMessages\LocalMessagesServidor\obj\Debug\LocalMes.1489F6E3.Up2Date
+C:\GitHub\LocalMessages\LocalMessagesServidor\obj\Debug\LocalMessagesServidor.exe
+C:\GitHub\LocalMessages\LocalMessagesServidor\obj\Debug\LocalMessagesServidor.pdb

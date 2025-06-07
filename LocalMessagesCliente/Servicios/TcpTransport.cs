@@ -81,8 +81,7 @@ namespace LocalMessagesApp.Servicios
             catch (Exception ex)
             {
                 //Falla en la lectura de datos
-                _cliente.Close();
-                throw new InvalidOperationException("Error al recibir datos.", ex);
+                throw new InvalidOperationException("Error al recibir datos(cliente desconectado?).", ex);
             }
         }
 

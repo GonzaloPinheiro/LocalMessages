@@ -19,7 +19,7 @@ namespace LocalMessagesApp.Views
             }
             else //No es comando
             {
-                await _chat.EnviarMensaje(texto); 
+                await _chat.EnviarMensajeAsync(texto); 
             }
         }
 
@@ -66,13 +66,13 @@ namespace LocalMessagesApp.Views
             }
             var nuevoNombre = args[0];
 
-            await _chat.EnviarMensaje($"CMD|nick|{nuevoNombre}");
+            await _chat.EnviarMensajeAsync($"CMD|nick|{nuevoNombre}");
         }
 
         //Comando para listar usuarios conectados
         private async Task CmdListaUsuarios()
         {
-            await _chat.EnviarMensaje($"CMD|list");
+            await _chat.EnviarMensajeAsync($"CMD|list");
         }
 
         //Comando para conectarse al servidor
@@ -86,7 +86,7 @@ namespace LocalMessagesApp.Views
             var nick = args[0];
 
             // Conectar de forma asíncrona
-            await _chat.ConnectAsync("127.0.0.1", 1234, nick);
+            await _chat.ConnectarAsync("127.0.0.1", 1234, nick);
             tbxUserName.Text = nick;
         }
 

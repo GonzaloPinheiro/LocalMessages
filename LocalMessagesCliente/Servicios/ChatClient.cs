@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using LocalMessagesCore.Interfaces; 
 
 namespace LocalMessagesApp.Servicios
 {
@@ -14,30 +15,39 @@ namespace LocalMessagesApp.Servicios
     /// </summary>
     public class ChatClient
     {
-        private TcpClient _tcp;
+        private readonly ITransport _transporte;
         private CancellationTokenSource _cts;
 
         public event Action<string> OnMessageReceived;
         public event Action<bool> OnConnectionStatusChanged;
 
 
+        /// <summary>
+        /// En el constructor, recibe el transporte (por ejemplo, TransporteTcp).
+        /// </summary>
+        public ChatClient(ITransport transporte)
+        {
+            _transporte = transporte;
+        }
+
 
         /// <summary>
         /// Conecta al servidor y envía el nombre de usuario.
         /// También lanza en segundo plano el bucle de recepción.
         /// </summary>
-        public async Task ConnectAsync(string host, int port, string username)
+        public async Task ConnectarAsync(string host, int port, string username)
         {
-            _tcp = new TcpClient();
+            //_tcp = new TcpClient();
             _cts = new CancellationTokenSource();
 
-            await _tcp.ConnectAsync(host, port);
+            // 1) Conectar usando ITransport
+            await _transporte.ConectarAsync(host, port);
             OnConnectionStatusChanged?.Invoke(true);
 
-            //Enviar el nombre de usuario
-            await EnviarMensaje(username);
+            // 2) Enviar el nombre de usuario
+            await EnviarMensajeAsync(username);
 
-            //Variable discard, no se va a usar. Solo la uso para lanzar el task.
+            // 3) Lanzar el bucle de recepción en segundo plano
             _ = Task.Run(RecibirLoop, _cts.Token);
         }
 
@@ -45,10 +55,9 @@ namespace LocalMessagesApp.Servicios
         /// <summary>
         /// Envía un texto al servidor de forma asíncrona.
         /// </summary>
-        public async Task EnviarMensaje(string mensaje)
+        public async Task EnviarMensajeAsync(string mensaje)
         {
-            var data = Encoding.UTF8.GetBytes(mensaje);
-            await _tcp.GetStream().WriteAsync(data, 0, data.Length);
+            await _transporte.EnviarAsync(mensaje);
         }
 
 
@@ -63,12 +72,14 @@ namespace LocalMessagesApp.Servicios
             {
                 while (!_cts.IsCancellationRequested)
                 {
-                    var n = await _tcp.GetStream().ReadAsync(buffer, 0, buffer.Length, _cts.Token);
-                    if (n == 0)
+                    //var n = await _tcp.GetStream().ReadAsync(buffer, 0, buffer.Length, _cts.Token);
+                    string mensaje = await _transporte.RecibirAsync();
+
+                    if (mensaje == null)
                     {
                         break;
                     }
-                    var mensaje = Encoding.UTF8.GetString(buffer, 0, n);
+                    //var mensaje = Encoding.UTF8.GetString(buffer, 0, n);
                     OnMessageReceived?.Invoke(mensaje);
                 }
 
@@ -86,7 +97,7 @@ namespace LocalMessagesApp.Servicios
         public void DesconectarCliente()
         {
             _cts?.Cancel();
-            _tcp?.Close();
+            _transporte.Desconectar();
             OnConnectionStatusChanged?.Invoke(false);
         }
 

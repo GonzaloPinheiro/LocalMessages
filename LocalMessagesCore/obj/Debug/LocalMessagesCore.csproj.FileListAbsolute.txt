@@ -1,0 +1,6 @@
+C:\GitHub\LocalMessages\LocalMessagesCore\bin\Debug\LocalMessagesCore.dll
+C:\GitHub\LocalMessages\LocalMessagesCore\bin\Debug\LocalMessagesCore.pdb
+C:\GitHub\LocalMessages\LocalMessagesCore\obj\Debug\LocalMessagesCore.csproj.AssemblyReference.cache
+C:\GitHub\LocalMessages\LocalMessagesCore\obj\Debug\LocalMessagesCore.csproj.CoreCompileInputs.cache
+C:\GitHub\LocalMessages\LocalMessagesCore\obj\Debug\LocalMessagesCore.dll
+C:\GitHub\LocalMessages\LocalMessagesCore\obj\Debug\LocalMessagesCore.pdb

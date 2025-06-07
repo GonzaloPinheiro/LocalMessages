@@ -1,4 +1,5 @@
 ﻿using LocalMessagesApp.Servicios;
+using LocalMessagesCore.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,12 +18,15 @@ namespace LocalMessagesApp.Views
 {
     public partial class FormChat : Form
     {
-        private readonly ChatClient _chat = new ChatClient();
+        private readonly ITransport _transporte;
+        private readonly ChatClient _chat;
 
         public FormChat()
         {
             InitializeComponent();
 
+            _transporte = new TransporteTcp();
+            _chat = new ChatClient(_transporte);
 
             //Gestiona el mensaje o comando recibido
             _chat.OnMessageReceived += msg =>
@@ -75,13 +79,19 @@ namespace LocalMessagesApp.Views
             else
             {
                 var nick = tbxUserName.Text.Trim();
+
+
                 if (string.IsNullOrEmpty(nick))
                 {
                     MessageBox.Show("Porfavor introduzca un nombre de usuario");
                     return;
                 }
-                // Conectar de forma asíncrona
-                await _chat.ConnectAsync("127.0.0.1", 1234, nick);
+
+
+                //Conectar de forma asíncrona
+                await _chat.ConnectarAsync("127.0.0.1", 1234, nick);
+
+
             }
         }
 
