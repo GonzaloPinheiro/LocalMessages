@@ -45,6 +45,9 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Servicios\ChatService.cs" />
+    <Compile Include="Servicios\ComandosService.cs" />
+    <Compile Include="Servicios\MensajesService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
