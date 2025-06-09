@@ -22,6 +22,7 @@ Sirve como referencia independiente de cualquier paso intermedio y no tiene por 
 
 ## 📁 Estructura de carpetas
 
+```text
 LocalMessagesCliente/
 ├── Program.cs ← Punto de arranque de la aplicación WinForms
 ├── App.config ← Ajustes de servidor, puerto y transporte
@@ -50,7 +51,7 @@ LocalMessagesCliente/
 ├── AssemblyInfo.cs ← Información del ensamblado (.NET)
 ├── Resources.resx ← Recursos (imágenes, cadenas localizadas)
 └── Settings.settings ← Valores de configuración de usuario
-
+```
 ---
 
 ## ⚙️ Flujo de funcionamiento
