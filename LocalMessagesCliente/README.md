@@ -94,4 +94,4 @@ MIT — Este cliente forma parte de un proyecto de aprendizaje; ¡siéntete libr
 
 ---
 
-![Imagen chat](images/Chat.png)
+![Imagen chat](../images/Chat.png)

@@ -94,4 +94,4 @@ MIT — Proyecto personal de aprendizaje. ¡Siéntete libre de usar y modificar!
 
 ---
 
-![Imagen server](images/Server.png)
+![Imagen server](../images/Server.png)
