@@ -91,3 +91,7 @@ LocalMessagesCliente/
 ## 📄 Licencia
 
 MIT — Este cliente forma parte de un proyecto de aprendizaje; ¡siéntete libre de usarlo y mejorarlo! 😉
+
+---
+
+![Imagen chat](images/Chat.png)
