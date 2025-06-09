@@ -10,6 +10,7 @@ namespace LocalMessagesCore.Modelos
     public class Cliente
     {
         public string Nombre { get; set; }
-        public TcpClient Tcp { get; set; }
+        //public TcpClient Tcp { get; set; }
     }
+
 }

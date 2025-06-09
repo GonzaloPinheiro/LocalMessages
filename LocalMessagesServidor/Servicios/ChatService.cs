@@ -1,5 +1,8 @@
-﻿using LocalMessagesCore.Modelos;
+﻿using ChatCSharp.Server.Services;
+using LocalMessagesCore.Modelos;
+using LocalMessagesServidor.Models;
 using LocalMessagesServidor.Servicios;
+using LocalMessagesServidor.Transports;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,20 +19,20 @@ namespace LocalMessagesServidor.Servicios
     public static class Server
     {
         // Lista de clientes conectados
-        private static ObservableCollection<Cliente> clientesConectados = new ObservableCollection<Cliente>();
+        private static ObservableCollection<ClienteConexion> clientesConectados = new ObservableCollection<ClienteConexion>();
 
 
         // Hilo que ejecuta el servidor
-        private static Thread serverThread;
-        private static bool activeServer = false;
+        private static Thread hiloServidor;
+        private static bool servidorActivo = false;
 
         public static void Start() //lógica de LanzarServidor
         {
-            if (!activeServer)
+            if (!servidorActivo)
             {
-                serverThread = new Thread(LanzarServidor);
-                serverThread.Start();
-                activeServer = true;
+                hiloServidor = new Thread(LanzarServidor);
+                hiloServidor.Start();
+                servidorActivo = true;
             }
             else
             {
@@ -55,11 +58,9 @@ namespace LocalMessagesServidor.Servicios
                 {
                     TcpClient tcpClient = listener.AcceptTcpClient();
 
-                    var newClient = new Cliente
-                    {
-                        Nombre = "",
-                        Tcp = tcpClient
-                    };
+                    // Después:
+                    var transporte = new TransporteTcp(tcpClient);
+                    var newClient = new ClienteConexion(transporte) { Nombre = ""};
 
                     lock (clientesConectados)
                     {
@@ -69,7 +70,7 @@ namespace LocalMessagesServidor.Servicios
                     Console.WriteLine("Conexión aceptada desde " + tcpClient.Client.RemoteEndPoint);
 
                     // Arrancamos un hilo para atender a este cliente
-                    var clientThread = new Thread(() => ManejarClienteLoop(tcpClient, newClient));
+                    var clientThread = new Thread(() => ManejarClienteLoop(newClient));
                     clientThread.Start();
                 }
             }
@@ -80,89 +81,72 @@ namespace LocalMessagesServidor.Servicios
         }
 
 
-        private static void ManejarClienteLoop(TcpClient tcpClient, Cliente cliente) //invocado en cada hilo
+        private static async Task ManejarClienteLoop(ClienteConexion cliente)
         {
             try
             {
-                byte[] buffer = new byte[100];
-                int receivedBytes;
+                // 1)Primera lectura: recibir el nombre de usuario
+                cliente.Nombre = await cliente.Transporte.RecibirAsync();
+                Console.WriteLine($"Nuevo cliente conectado: {cliente.Nombre}\n");
 
-                // Primera lectura: recibimos el nombre de usuario
-                receivedBytes = tcpClient.Client.Receive(buffer);
-                cliente.Nombre = Encoding.ASCII.GetString(buffer, 0, receivedBytes);
-                Console.WriteLine("Nuevo cliente conectado: " + cliente.Nombre + "\n");
+                // 2)Notificar a todos menos al emisor
+                await MensajesService.EnviarMensajeMenosEmisorAsync(
+                    $"El usuario {cliente.Nombre} se ha conectado.",
+                    cliente,
+                    clientesConectados);
 
-                // Notificamos a todos menos al emisor que el usuario se conectó
-                MensajesService.EnviarMensajeMenosEmisor($"El usuario {cliente.Nombre} se ha conectado.", tcpClient, clientesConectados);
+                // 3)Enviar lista inicial de clientes
+                await MensajesService.EnviarMensajeBroadcastAsync(
+                    MensajesService.GenerarListaClientes(clientesConectados),
+                    clientesConectados);
 
-                // Enviamos la lista inicial de clientes al recién conectado
-                MensajesService.EnviarMensajeBroadcast(GenerarListaClientes(), clientesConectados);
-
-                // Actualizamos el nombre en la colección (por si llega vacío al crearse)
-                lock (clientesConectados)
+                // 4)Bucle de recepción de mensajes
+                string mensaje;
+                while ((mensaje = await cliente.Transporte.RecibirAsync()) != null)
                 {
-                    for (int i = 0; i < clientesConectados.Count; i++)
+                    if (mensaje.StartsWith("CMD|"))
                     {
-                        if (clientesConectados[i].Tcp.Client == tcpClient.Client)
-                        {
-                            clientesConectados[i].Nombre = cliente.Nombre;
-                            break;
-                        }
-                    }
-                }
-
-                // Bucle de recepción de mensajes
-                while (true)
-                {
-                    receivedBytes = tcpClient.Client.Receive(buffer);
-
-                    // Si recibe 0 bytes, el cliente se desconectó
-                    if (receivedBytes == 0)
-                        break;
-
-                    string message = Encoding.ASCII.GetString(buffer, 0, receivedBytes);
-
-                    if (message.StartsWith("CMD|"))
-                    {
-                        // Procesar comando (/nick, /list, etc.)
-                        ComandosService.ProcesarComando(message, cliente, clientesConectados ,tcpClient);
+                        // Procesar comando
+                        await ComandosService.ProcesarComandoAsync(
+                            mensaje,
+                            cliente,
+                            clientesConectados);
                     }
                     else
                     {
-                        // Mensaje normal: lo mostramos y lo reenviamos a todos
-                        Console.WriteLine($"Mensaje del cliente ({cliente.Nombre}): {message}");
-                        string clientText = $"{cliente.Nombre}: {message}";
-                        MensajesService.EnviarMensajeBroadcast(clientText, clientesConectados);
+                        // Mensaje normal: mostrar y reenviar
+                        Console.WriteLine($"Mensaje de {cliente.Nombre}: {mensaje}");
+                        await MensajesService.EnviarMensajeBroadcastAsync(
+                            $"{cliente.Nombre}: {mensaje}",
+                            clientesConectados);
                     }
                 }
 
-                // Si salimos del bucle, este cliente se ha desconectado
-                tcpClient.Close();
+                // 5)El cliente cerró la conexión
                 Console.WriteLine($"Cliente desconectado: {cliente.Nombre}");
-                MensajesService.EnviarMensajeMenosEmisor($"El usuario {cliente.Nombre} se ha desconectado.", tcpClient, clientesConectados);
+                await MensajesService.EnviarMensajeMenosEmisorAsync(
+                    $"El usuario {cliente.Nombre} se ha desconectado.",
+                    cliente,
+                    clientesConectados);
 
-                // Lo eliminamos de la lista de clientes
                 lock (clientesConectados)
                 {
                     clientesConectados.Remove(cliente);
                 }
 
-                // Enviamos la lista actualizada de clientes a todos
-                MensajesService.EnviarMensajeBroadcast(GenerarListaClientes(), clientesConectados);
+                // 6)Enviar lista actualizada
+                await MensajesService.EnviarMensajeBroadcastAsync(
+                    MensajesService.GenerarListaClientes(clientesConectados),
+                    clientesConectados);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine("Conexión con un cliente perdida: " + e.Message);
-                tcpClient.Close();
+                Console.WriteLine($"Error con cliente {cliente.Nombre}: {ex.Message}");
             }
-
-        }
-
-        private static string GenerarListaClientes()
-        {
-            lock (clientesConectados)
+            finally
             {
-                return "CMD|list|" + string.Join("|", clientesConectados.Select(c => c.Nombre));
+                //Asegurarse de desconexión limpia
+                cliente.Transporte.Desconectar();
             }
         }
     }

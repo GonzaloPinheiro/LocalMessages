@@ -1,34 +1,54 @@
-﻿using System;
+﻿using ChatCSharp.Server.Services;
+using LocalMessagesCore.Modelos;
+using LocalMessagesServidor.Models;
+using LocalMessagesServidor.Servicios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using LocalMessagesCore.Modelos;
-using LocalMessagesServidor.Servicios;
 
 namespace LocalMessagesServidor.Servicios
 {
     internal static class ComandosService
     {
-        public static void ProcesarComando(string mensaje, Cliente emisor, IEnumerable<Cliente> clienetesConectados, TcpClient tcpClient)
+        /// <summary>
+        /// Procesa los comandos recibidos ("/nick", "/list", etc.) de forma asíncrona.
+        /// </summary>
+        public static async Task ProcesarComandoAsync(
+            string mensaje,
+            ClienteConexion emisor,
+            IEnumerable<ClienteConexion> clientesConectados)
         {
             // Estructura: "CMD|<comando>|<arg1>|<arg2>|..."
-            var parts = mensaje.Split('|', (char)StringSplitOptions.RemoveEmptyEntries);
-            var command = parts[1].ToLower();
-            var args = parts.Skip(2).ToArray();
+            var partes = mensaje.Split('|', (char)StringSplitOptions.RemoveEmptyEntries);
+            var comando = partes[1].ToLower();
+            var args = partes.Skip(2).ToArray();
 
-            switch (command)
+            switch (comando)
             {
                 case "nick":
                     if (args.Length == 1)
                     {
-                        string oldNick = emisor.Nombre;
+                        string nickAnterior = emisor.Nombre;
                         emisor.Nombre = args[0];
-                        Console.WriteLine($"El usuario {oldNick} ha cambiado su nombre a {emisor.Nombre}");
-                        MensajesService.EnviarMensajeMenosEmisor($"El usuario {oldNick} ha cambiado su nombre a {emisor.Nombre}", tcpClient, clienetesConectados);
-                        MensajesService.EnviarMensajeAEmisor($"Tu nombre ha sido cambiado a {emisor.Nombre}", tcpClient, clienetesConectados);
-                        MensajesService.EnviarMensajeBroadcast(GenerarListaClientes(clienetesConectados), clienetesConectados);
+                        Console.WriteLine($"El usuario {nickAnterior} ha cambiado su nombre a {emisor.Nombre}");
+
+                        //Notificar al resto del cambio de nick
+                        await MensajesService.EnviarMensajeMenosEmisorAsync(
+                            $"El usuario {nickAnterior} ha cambiado su nombre a {emisor.Nombre}",
+                            emisor,
+                            clientesConectados);
+
+                        //Notificar al propio emisor del cambio de nick
+                        await MensajesService.EnviarMensajeAEmisorAsync(
+                            $"Tu nombre ha sido cambiado a {emisor.Nombre}",
+                            emisor);
+
+                        //Enviar lista actualizada a todos los clientes
+                        var lista = MensajesService.GenerarListaClientes(clientesConectados);
+                        await MensajesService.EnviarMensajeBroadcastAsync(lista, clientesConectados);
                     }
                     else
                     {
@@ -37,25 +57,17 @@ namespace LocalMessagesServidor.Servicios
                     break;
 
                 case "list":
-                    lock (clienetesConectados)
-                    {
-                        string userList = "Usuarios conectados: " + string.Join(", ", clienetesConectados.Select(c => c.Nombre));
-                        tcpClient.Client.Send(Encoding.ASCII.GetBytes(userList));
-                    }
+                    //Construir el string con la lista y enviarlo solo al emisor
+                    string listaUsuarios = "Usuarios conectados: " +
+                        string.Join(", ", clientesConectados.Select(c => c.Nombre));
+                    await MensajesService.EnviarMensajeAEmisorAsync(listaUsuarios, emisor);
                     break;
 
                 default:
-                    Console.WriteLine("Comando no reconocido: " + command);
+                    Console.WriteLine("Comando no reconocido: " + comando);
                     break;
             }
         }
 
-        private static string GenerarListaClientes(IEnumerable<Cliente> clienetesConectados)
-        {
-            lock (clienetesConectados)
-            {
-                return "CMD|list|" + string.Join("|", clienetesConectados.Select(c => c.Nombre));
-            }
-        }
     }
 }

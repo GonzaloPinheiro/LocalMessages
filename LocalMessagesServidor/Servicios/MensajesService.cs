@@ -1,76 +1,84 @@
 ﻿using LocalMessagesCore.Modelos;
+using LocalMessagesServidor.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using LocalMessagesCore.Interfaces;
 
-namespace LocalMessagesServidor.Servicios
+
+namespace ChatCSharp.Server.Services
 {
     public static class MensajesService
     {
-        public static void EnviarMensajeBroadcast(string text, IEnumerable<Cliente> clientesConectados)
+        // 1)Enviar mensaje a todos
+        public static async Task EnviarMensajeBroadcastAsync(
+            string texto,
+            IEnumerable<ClienteConexion> clientesConectados)
         {
-            lock (clientesConectados)
+            // Creamos una copia para evitar excep. por colección modificada
+            var destino = clientesConectados.ToList();
+            foreach (var cliente in destino)
             {
-                byte[] data = Encoding.ASCII.GetBytes(text);
-                foreach (var c in clientesConectados)
+                try
+                {
+                    await cliente.Transporte.EnviarAsync(texto);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Error al enviar a {cliente.Nombre}: {e.Message}");
+                }
+            }
+        }
+
+        // 2)Enviar mensaje a todos menos al indicado
+        public static async Task EnviarMensajeMenosEmisorAsync(
+            string texto,
+            ClienteConexion emisor,
+            IEnumerable<ClienteConexion> clientesConectados)
+        {
+            var destino = clientesConectados.ToList();
+            foreach (var cliente in destino)
+            {
+                if (cliente != emisor)
                 {
                     try
                     {
-                        c.Tcp.Client.Send(data);
+                        await cliente.Transporte.EnviarAsync(texto);
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine("Error al enviar mensaje a un cliente: " + e.Message);
+                        Console.WriteLine($"Error al enviar a {cliente.Nombre}: {e.Message}");
                     }
                 }
             }
         }
 
-        public static void EnviarMensajeMenosEmisor(string text, TcpClient excepto, IEnumerable<Cliente> clientesConectados)
+        // 3)Enviar mensaje solo al indicado
+        public static async Task EnviarMensajeAEmisorAsync(
+            string texto,
+            ClienteConexion emisor)
         {
-            lock (clientesConectados)
+            try
             {
-                byte[] data = Encoding.ASCII.GetBytes(text);
-                foreach (var c in clientesConectados)
-                {
-                    if (c.Tcp.Client != excepto.Client)
-                    {
-                        try
-                        {
-                            c.Tcp.Client.Send(data);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine("Error al enviar mensaje a un cliente: " + e.Message);
-                        }
-                    }
-                }
+                await emisor.Transporte.EnviarAsync(texto);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error al enviar a {emisor.Nombre}: {e.Message}");
             }
         }
 
-        public static void EnviarMensajeAEmisor(string text, TcpClient emisor, IEnumerable<Cliente> clientesConectados)
+        // 4)Generar string con lista de nombres
+        public static string GenerarListaClientes(
+            IEnumerable<ClienteConexion> clientesConectados)
         {
             lock (clientesConectados)
             {
-                byte[] data = Encoding.ASCII.GetBytes(text);
-                foreach (var c in clientesConectados)
-                {
-                    if (c.Tcp.Client == emisor.Client)
-                    {
-                        try
-                        {
-                            c.Tcp.Client.Send(data);
-                            break;
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine("Error al enviar mensaje al cliente: " + e.Message);
-                        }
-                    }
-                }
+                return "CMD|list|" +
+                    string.Join("|", clientesConectados.Select(c => c.Nombre));
             }
         }
     }
