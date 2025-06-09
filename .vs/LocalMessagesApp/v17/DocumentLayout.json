@@ -85,7 +85,7 @@
               "RelativeDocumentMoniker": "LocalMessagesServidor\\Servicios\\ChatService.cs",
               "ToolTip": "C:\\GitHub\\LocalMessages\\LocalMessagesServidor\\Servicios\\ChatService.cs",
               "RelativeToolTip": "LocalMessagesServidor\\Servicios\\ChatService.cs",
-              "ViewState": "AgIAAC0AAAAAAAAAAADwvzsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADAAAAAAAAAAAADwvzsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-07T12:45:21.793Z",
               "IsPinned": true,
@@ -102,8 +102,7 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAUwD4AAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-07T12:45:22.983Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -116,8 +115,7 @@
               "ViewState": "AgIAADkAAAAAAAAAAAAIwBoAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-07T12:45:22.353Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -156,8 +154,7 @@
               "RelativeToolTip": "LocalMessagesServidor\\Models\\ClienteConexion.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwBIAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T18:13:20.049Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-07T18:13:20.049Z"
             },
             {
               "$type": "Document",
@@ -169,8 +166,7 @@
               "RelativeToolTip": "LocalMessagesCore\\Interfaces\\ITransport.cs",
               "ViewState": "AgIAAAIAAAAAAAAAAAAWwBAAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T17:50:16.941Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-07T17:50:16.941Z"
             },
             {
               "$type": "Document",
@@ -182,8 +178,7 @@
               "RelativeToolTip": "LocalMessagesServidor\\Transports\\TcpTransport.cs",
               "ViewState": "AgIAAA0AAAAAAAAAAAAewB8AAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T17:48:46.185Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-07T17:48:46.185Z"
             },
             {
               "$type": "Document",
@@ -207,8 +202,7 @@
               "RelativeToolTip": "LocalMessagesCliente\\Servicios\\ChatClient.cs",
               "ViewState": "AgIAADcAAAAAAAAAAAAowGAAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T12:49:48.684Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-07T12:49:48.684Z"
             },
             {
               "$type": "Document",
