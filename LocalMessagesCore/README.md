@@ -25,6 +25,7 @@ Sirve como referencia independiente de cualquier paso intermedio y no tiene por 
 
 ## 📁 Estructura de carpetas
 
+```text
 LocalMessagesCore/
 ├── Interfaces/
 │ └── ITransport.cs ← Contrato para conectar, enviar, recibir y desconectar
@@ -37,6 +38,7 @@ LocalMessagesCore/
 └── DTOs/
 ├── LoginRequest.cs ← Datos para login (Usuario, Contraseña)
 └── RegisterRequest.cs ← Datos para registro de nuevos usuarios
+```
 
 ---
 
