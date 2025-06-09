@@ -26,6 +26,7 @@ Sirve como referencia independiente de cualquier paso intermedio y no tiene por 
 
 ## 🗂️ Estructura de carpetas esperada (no tiene por que ajustarse a la realidad)
 
+```text
 LocalMessagesServidor/
 ├── Program.cs ← Punto de entrada y arranque del servidor
 ├── appsettings.json ← Configuración de puerto, JWT y cadena de base de datos
@@ -51,6 +52,7 @@ LocalMessagesServidor/
 │
 └── Authentication/ ← Configuración de JWT
 └── JwtSettings.cs ← Claves, issuer y audience para tokens
+```
 
 ---
 
