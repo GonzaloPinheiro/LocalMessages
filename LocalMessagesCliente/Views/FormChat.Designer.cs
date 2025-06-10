@@ -37,13 +37,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lbxUssers = new System.Windows.Forms.ListBox();
             this.lbxChat = new System.Windows.Forms.ListBox();
+            this.cbxTipoConexion = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnConection
             // 
             this.btnConection.Location = new System.Drawing.Point(25, 478);
             this.btnConection.Name = "btnConection";
-            this.btnConection.Size = new System.Drawing.Size(96, 32);
+            this.btnConection.Size = new System.Drawing.Size(129, 32);
             this.btnConection.TabIndex = 0;
             this.btnConection.Text = "Conectar";
             this.btnConection.UseVisualStyleBackColor = true;
@@ -51,9 +52,9 @@
             // 
             // tbxUserName
             // 
-            this.tbxUserName.Location = new System.Drawing.Point(25, 434);
+            this.tbxUserName.Location = new System.Drawing.Point(25, 450);
             this.tbxUserName.Name = "tbxUserName";
-            this.tbxUserName.Size = new System.Drawing.Size(100, 22);
+            this.tbxUserName.Size = new System.Drawing.Size(129, 22);
             this.tbxUserName.TabIndex = 1;
             // 
             // tbxReceiver
@@ -116,12 +117,21 @@
             this.lbxChat.Size = new System.Drawing.Size(604, 340);
             this.lbxChat.TabIndex = 8;
             // 
+            // cbxTipoConexion
+            // 
+            this.cbxTipoConexion.FormattingEnabled = true;
+            this.cbxTipoConexion.Location = new System.Drawing.Point(25, 420);
+            this.cbxTipoConexion.Name = "cbxTipoConexion";
+            this.cbxTipoConexion.Size = new System.Drawing.Size(129, 24);
+            this.cbxTipoConexion.TabIndex = 9;
+            // 
             // FormChat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Highlight;
             this.ClientSize = new System.Drawing.Size(945, 531);
+            this.Controls.Add(this.cbxTipoConexion);
             this.Controls.Add(this.lbxChat);
             this.Controls.Add(this.lbxUssers);
             this.Controls.Add(this.label2);
@@ -149,6 +159,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox lbxUssers;
         private System.Windows.Forms.ListBox lbxChat;
+        private System.Windows.Forms.ComboBox cbxTipoConexion;
     }
 }
 

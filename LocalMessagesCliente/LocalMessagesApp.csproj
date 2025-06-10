@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Servicios\TcpTransport.cs" />
+    <Compile Include="Servicios\WebSocketTransport.cs" />
     <Compile Include="Views\FormChat.cs">
       <SubType>Form</SubType>
     </Compile>

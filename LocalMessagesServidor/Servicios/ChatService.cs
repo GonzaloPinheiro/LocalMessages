@@ -53,12 +53,12 @@ namespace LocalMessagesServidor.Servicios
                 Console.WriteLine("Server activo en puerto 1234...");
                 Console.WriteLine("Esperando por conexiones...\n");
 
-                // Bucle principal: aceptar conexiones entrantes
+                //Bucle principal: aceptar conexiones entrantes
                 while (true)
                 {
                     TcpClient tcpClient = listener.AcceptTcpClient();
 
-                    // Después:
+                    //Después creo el ITransport de tcp
                     var transporte = new TransporteTcp(tcpClient);
                     var newClient = new ClienteConexion(transporte) { Nombre = ""};
 
