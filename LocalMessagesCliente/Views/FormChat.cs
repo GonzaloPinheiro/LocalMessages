@@ -126,7 +126,7 @@ namespace LocalMessagesApp.Views
 
 
 
-        // Botón Enviar
+        //Botón Enviar
         private async void BtnSend_Click(object sender, EventArgs e)
         {
             var text = tbxMessage.Text.Trim();
@@ -136,7 +136,7 @@ namespace LocalMessagesApp.Views
                 return;
             }
 
-            // Procesar la entrada del usuario y comrueba si es mensaje o comando
+            // Procesar la entrada del usuario y comprueba si es mensaje o comando
             await ProcesarEntrada(text);
             tbxMessage.Clear();
             tbxMessage.Focus();

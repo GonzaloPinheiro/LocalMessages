@@ -15,6 +15,7 @@ namespace LocalMessagesServidor
     {
         static void Main(string[] args)
         {
+
             try
             {
                 Server.Start();

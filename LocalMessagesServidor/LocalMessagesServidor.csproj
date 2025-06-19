@@ -50,6 +50,7 @@
     <Compile Include="Servicios\ComandosService.cs" />
     <Compile Include="Servicios\MensajesService.cs" />
     <Compile Include="Transports\TcpTransport.cs" />
+    <Compile Include="Transports\WebSocketTransport.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

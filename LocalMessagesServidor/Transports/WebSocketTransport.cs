@@ -1,22 +1,22 @@
 ﻿using LocalMessagesCore.Interfaces;
-using LocalMessagesCore.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Sockets;
-using System.Net.WebSockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LocalMessagesApp.Servicios
+namespace LocalMessagesServidor.Transports
 {
-    //Esto usa ITransport junto a WebSocket para establecer la conexión con el cliente
-    internal class TransporteWebSocket : ITransport
+    public class WebSocketTransport : ITransport
     {
-        private readonly WebSocket _client;
+        private readonly WebSocketTransport _transporte;
 
+        public WebSocketTransport(WebSocketTransport connectedClient)
+        {
+            _transporte = connectedClient;
+        }
 
-
+         
         public Task ConectarAsync(string host, int port)
         {
             throw new NotImplementedException();
