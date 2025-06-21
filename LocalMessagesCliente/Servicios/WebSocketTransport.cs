@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Net.WebSockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LocalMessagesApp.Servicios
@@ -13,28 +14,67 @@ namespace LocalMessagesApp.Servicios
     //Esto usa ITransport junto a WebSocket para establecer la conexión con el cliente
     internal class TransporteWebSocket : ITransport
     {
-        private readonly WebSocket _client;
+        private ClientWebSocket _client; // Change WebSocket to ClientWebSocket
 
+        public async Task ConectarAsync(string host, int port)
+        {
+            _client = new ClientWebSocket(); // Initialize ClientWebSocket
 
+            try
+            {
+                await _client.ConnectAsync(
+                    //new Uri($"ws://{host}:{port}"),
+                    new Uri($"ws://{host}:{port}/ws/"),
+                    CancellationToken.None);
+            }
+            catch (Exception ex)
+            {
+                _client = null;
+                throw new InvalidOperationException($"No se pudo conectar a {host}:{port}.", ex);
+            }
+        }
 
-        public Task ConectarAsync(string host, int port)
+        public async Task EnviarAsync(string datos)
+        {
+            if (_client != null && _client.State == WebSocketState.Open)
+            {
+                await _client.SendAsync(
+                    new ArraySegment<byte>(Encoding.UTF8.GetBytes(datos)),
+                    WebSocketMessageType.Text,
+                    true,
+                    CancellationToken.None);
+            }
+        }
+
+        public Task IniciarServerAsync()
         {
             throw new NotImplementedException();
         }
 
-        public void Desconectar()
+        public async Task<string> RecibirAsync()
         {
-            throw new NotImplementedException();
+            if (_client != null && _client.State == WebSocketState.Open)
+            {
+                var receiveBuffer = new byte[1024];
+                var result = await _client.ReceiveAsync(
+                    new ArraySegment<byte>(receiveBuffer),
+                    CancellationToken.None);
+
+                return Encoding.UTF8.GetString(receiveBuffer, 0, result.Count);
+            }
+
+            return string.Empty;
         }
 
-        public Task EnviarAsync(string datos)
+        void ITransport.Desconectar()
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<string> RecibirAsync()
-        {
-            throw new NotImplementedException();
+            if (_client != null && _client.State == WebSocketState.Open)
+            {
+                _client.CloseAsync(
+                    WebSocketCloseStatus.NormalClosure,
+                    "Cierre normal",
+                    CancellationToken.None);
+            }
         }
     }
 }

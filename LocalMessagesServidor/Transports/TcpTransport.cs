@@ -1,5 +1,6 @@
 ﻿using LocalMessagesCore.Interfaces;
 using System;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,8 @@ namespace LocalMessagesServidor.Transports
     {
         private readonly TcpClient _client;
 
+
+
         // El servidor ya tiene la conexión activa, así que la recibe por constructor
         /// <summary>
         /// Inicializa una nueva instancia de <see cref="TransporteTcp"/> con un cliente TCP ya conectado.
@@ -22,6 +25,10 @@ namespace LocalMessagesServidor.Transports
             _client = connectedClient;
         }
 
+        public Task IniciarServerAsync()
+        {
+            throw new NotSupportedException();
+        }
 
         /// <summary>
         /// En el contexto del servidor no se admite reconexión; siempre lanza <see cref="NotSupportedException"/>.

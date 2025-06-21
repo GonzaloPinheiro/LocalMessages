@@ -10,9 +10,11 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace LocalMessagesServidor.Servicios
 {
@@ -39,40 +41,57 @@ namespace LocalMessagesServidor.Servicios
                 Console.WriteLine("Server ya está funcionando");
             }
         }
-
+         
         private static void LanzarServidor()
         {
             TcpListener listener;
             IPAddress ipAd = IPAddress.Parse("127.0.0.1");
+
+
+            ////Intento webSocket
+            HttpListener _listener = new HttpListener();
+            ////_listener.Prefixes.Add($"http://{host}:{port}/ws/");
+            _listener.Prefixes.Add("http://127.0.0.1:1235/ws/");
 
             try
             {
                 listener = new TcpListener(ipAd, 1234);
                 listener.Start();
 
-                Console.WriteLine("Server activo en puerto 1234...");
-                Console.WriteLine("Esperando por conexiones...\n");
+                _listener.Start(); // Iniciar el HttpListener para WebSocket
 
-                //Bucle principal: aceptar conexiones entrantes
-                while (true)
-                {
-                    TcpClient tcpClient = listener.AcceptTcpClient();
+                // Lanzar tareas/hilos para cada tipo de conexión
+                var tcpThread = new Thread(() => AceptarConexionesTcp(listener));
+                tcpThread.Start();
 
-                    //Después creo el ITransport de tcp
-                    var transporte = new TransporteTcp(tcpClient);
-                    var newClient = new ClienteConexion(transporte) { Nombre = ""};
 
-                    lock (clientesConectados)
-                    {
-                        clientesConectados.Add(newClient);
-                    }
 
-                    Console.WriteLine("Conexión aceptada desde " + tcpClient.Client.RemoteEndPoint);
 
-                    // Arrancamos un hilo para atender a este cliente
-                    var clientThread = new Thread(() => ManejarClienteLoop(newClient));
-                    clientThread.Start();
-                }
+                var wsThread = new Thread(() => AceptarConexionesWebSocket(_listener));
+                wsThread.Start();
+
+
+                ////Bucle principal: aceptar conexiones entrantes
+                //while (true)
+                //{
+                //    TcpClient tcpClient = listener.AcceptTcpClient();
+
+                //    //Después creo el ITransport de tcp
+                //    var transporte = new TransporteTcp(tcpClient);
+                //    var newClient = new ClienteConexion(transporte) { Nombre = ""};
+
+
+                //    lock (clientesConectados)
+                //    {
+                //        clientesConectados.Add(newClient);
+                //    }
+
+                //    Console.WriteLine("Conexión aceptada desde " + tcpClient.Client.RemoteEndPoint);
+
+                //    // Arrancamos un hilo para atender a este cliente
+                //    var clientThread = new Thread(() => ManejarClienteLoop(newClient));
+                //    clientThread.Start();
+                //}
             }
             catch
             {
@@ -80,8 +99,52 @@ namespace LocalMessagesServidor.Servicios
             }
         }
 
+        private static void AceptarConexionesTcp(TcpListener listener)
+        {
+            Console.WriteLine("Server activo en puerto 1234...");
+            Console.WriteLine("Esperando por conexiones tcp...\n");
 
-        private static async Task ManejarClienteLoop(ClienteConexion cliente)
+            while (true)
+            {
+                TcpClient tcpClient = listener.AcceptTcpClient();
+                var transporte = new TransporteTcp(tcpClient);
+                var newClient = new ClienteConexion(transporte) { Nombre = "" };
+                lock (clientesConectados)
+                    clientesConectados.Add(newClient);
+                var clientThread = new Thread(() => ManejarClienteLoop(newClient));
+                clientThread.Start();
+            }
+        }
+
+        private static async void AceptarConexionesWebSocket(HttpListener httpListener)
+        {
+            Console.WriteLine("Server activo en puerto 1235...");
+            Console.WriteLine("Esperando por conexiones websocket...\n");
+
+
+            while (true)
+            {
+                var context = await httpListener.GetContextAsync();
+                if (context.Request.IsWebSocketRequest)
+                {
+                    var wsContext = await context.AcceptWebSocketAsync(null);
+                    var transporte = new TransporteWebSocket(wsContext.WebSocket);
+                    var newClient = new ClienteConexion(transporte) { Nombre = "" };
+                    lock (clientesConectados)
+                        clientesConectados.Add(newClient);
+                    var clientThread = new Thread(() => ManejarClienteLoop(newClient));
+                    clientThread.Start();
+                }
+                else
+                {
+                    context.Response.StatusCode = 400;
+                    context.Response.Close();
+                }
+            }
+        }
+
+
+        public static async Task ManejarClienteLoop(ClienteConexion cliente)
         {
             try
             {

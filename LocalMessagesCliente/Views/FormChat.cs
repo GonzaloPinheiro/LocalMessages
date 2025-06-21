@@ -21,6 +21,8 @@ namespace LocalMessagesApp.Views
         private  ITransport _transporte;
         private  ChatClient _chat;
 
+        private int puerto = 1234;
+
         public FormChat()
         {
             InitializeComponent();
@@ -90,10 +92,12 @@ namespace LocalMessagesApp.Views
                 switch (tipo)
                 {
                     case "TCP":
+                        puerto = 1234;
                         _transporte = new TransporteTcp();
                         _chat = new ChatClient(_transporte);
                         break;
                     case "WebSocket":
+                        puerto = 1235;
                         _transporte = new TransporteWebSocket();
                         _chat = new ChatClient(_transporte);
                         break;
@@ -118,7 +122,7 @@ namespace LocalMessagesApp.Views
 
 
                 //Conectar de forma asíncrona
-                await _chat.ConnectarAsync("127.0.0.1", 1234, nick);
+                await _chat.ConnectarAsync("127.0.0.1", puerto, nick);
 
 
             }

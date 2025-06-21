@@ -49,7 +49,7 @@ namespace LocalMessagesApp.Servicios
             }
             catch (Exception ex)
             {
-                //Si algo sale mal al enviar, cerramos la conexión
+                //Si algo sale mal al enviar, cerrar la conexión
                 _cliente?.Close();
                 _cliente = null;
                 throw new InvalidOperationException($"No se pudo enviar el mensaje: «{datos}».", ex);
@@ -93,6 +93,11 @@ namespace LocalMessagesApp.Servicios
         {
             _cliente?.Close();
             _cliente = null;
+        }
+
+        public Task IniciarServerAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }
