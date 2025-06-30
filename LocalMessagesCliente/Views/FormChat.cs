@@ -101,7 +101,6 @@ namespace LocalMessagesApp.Views
                         _transporte = new TransporteWebSocket();
                         _chat = new ChatClient(_transporte);
                         break;
-                    // añade más casos según tus implementaciones
                     default:
                         _transporte = new TransporteTcp();
                         _chat = new ChatClient(_transporte);

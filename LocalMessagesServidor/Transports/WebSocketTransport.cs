@@ -88,7 +88,7 @@ namespace LocalMessagesServidor.Transports
         {
             if (_webSocket == null || _webSocket.State != WebSocketState.Open)
             {
-                return string.Empty;
+                return null;
             }
                 
 

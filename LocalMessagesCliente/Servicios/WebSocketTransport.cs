@@ -70,10 +70,12 @@ namespace LocalMessagesApp.Servicios
         {
             if (_client != null && _client.State == WebSocketState.Open)
             {
+                
+
                 _client.CloseAsync(
                     WebSocketCloseStatus.NormalClosure,
                     "Cierre normal",
-                    CancellationToken.None);
+                    CancellationToken.None).Wait();
             }
         }
     }
