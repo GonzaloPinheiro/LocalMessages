@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LocalMessagesCore.Modelos;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace LocalMessagesCore.Interfaces
         /// <summary>
         /// // Envía texto (por ejemplo JSON) de forma asíncrona
         /// </summary>
-        Task EnviarAsync(string datos);
+        Task EnviarAsync(TipoMensaje TipoMensaje, string datos);
 
         /// <summary>
         /// Recibe un mensaje completo (por ejemplo JSON) de forma asíncrona.

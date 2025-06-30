@@ -1,9 +1,11 @@
 ﻿using LocalMessagesCore.Interfaces;
+using LocalMessagesCore.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -37,14 +39,17 @@ namespace LocalMessagesApp.Servicios
         /// <summary>
         /// Envía el texto (por ejemplo JSON) al servidor.
         /// </summary>
-        public async Task EnviarAsync(string datos)
+        public async Task EnviarAsync(TipoMensaje prefijo, string datos)
         {
             if (_cliente == null || !_cliente.Connected)
                 throw new InvalidOperationException("Primero debes conectar antes de enviar.");
 
+            var persona = new MensajeCliente { PrefijoMensaje = prefijo, ContenidoMensaje = datos };
+            string json = JsonSerializer.Serialize(persona);
+
             try
             {
-                var buffer = Encoding.UTF8.GetBytes(datos);
+                var buffer = Encoding.UTF8.GetBytes(json);
                 await _cliente.GetStream().WriteAsync(buffer, 0, buffer.Length);
             }
             catch (Exception ex)
@@ -52,7 +57,7 @@ namespace LocalMessagesApp.Servicios
                 //Si algo sale mal al enviar, cerrar la conexión
                 _cliente?.Close();
                 _cliente = null;
-                throw new InvalidOperationException($"No se pudo enviar el mensaje: «{datos}».", ex);
+                throw new InvalidOperationException($"No se pudo enviar el mensaje: «{json}».", ex);
             }
         }
 

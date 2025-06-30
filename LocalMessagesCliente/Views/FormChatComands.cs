@@ -1,7 +1,9 @@
-﻿using System;
+﻿using LocalMessagesCore.Modelos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,14 +14,16 @@ namespace LocalMessagesApp.Views
     {
         private async Task ProcesarEntrada(string texto)
         {
+            MensajeCliente mensaje = JsonSerializer.Deserialize<MensajeCliente>(texto);
+
             //Es comando
-            if (texto.StartsWith("/"))
+            if (mensaje.PrefijoMensaje.HasFlag(TipoMensaje.CMD))
             {
                 await ManejarComando(texto);
             }
             else //No es comando
             {
-                await _chat.EnviarMensajeAsync(texto); 
+                await _chat.EnviarMensajeAsync(TipoMensaje.TXT, texto); 
             }
         }
 
@@ -66,13 +70,13 @@ namespace LocalMessagesApp.Views
             }
             var nuevoNombre = args[0];
 
-            await _chat.EnviarMensajeAsync($"CMD|nick|{nuevoNombre}");
+            await _chat.EnviarMensajeAsync(TipoMensaje.CMD_Nick, nuevoNombre);
         }
 
         //Comando para listar usuarios conectados
         private async Task CmdListaUsuarios()
         {
-            await _chat.EnviarMensajeAsync($"CMD|list");
+            await _chat.EnviarMensajeAsync(TipoMensaje.CMD_List, "");
         }
 
         //Comando para conectarse al servidor

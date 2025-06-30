@@ -60,3 +60,7 @@ C:\GitHub\LocalMessages\LocalMessagesCliente\bin\Debug\System.Text.Encodings.Web
 C:\GitHub\LocalMessages\LocalMessagesCliente\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\GitHub\LocalMessages\LocalMessagesCliente\bin\Debug\System.ValueTuple.xml
 C:\GitHub\LocalMessages\LocalMessagesCliente\bin\Debug\LocalMessagesCore.dll.config
+C:\GitHub\LocalMessages\LocalMessagesCliente\bin\Debug\System.IO.Pipelines.dll
+C:\GitHub\LocalMessages\LocalMessagesCliente\bin\Debug\System.Text.Json.dll
+C:\GitHub\LocalMessages\LocalMessagesCliente\bin\Debug\System.IO.Pipelines.xml
+C:\GitHub\LocalMessages\LocalMessagesCliente\bin\Debug\System.Text.Json.xml

@@ -8,6 +8,7 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace LocalMessagesApp.Servicios
 {
@@ -34,15 +35,28 @@ namespace LocalMessagesApp.Servicios
             }
         }
 
-        public async Task EnviarAsync(string datos)
+        public async Task EnviarAsync(TipoMensaje prefijo, string datos)
         {
-            if (_client != null && _client.State == WebSocketState.Open)
+            var persona = new MensajeCliente { PrefijoMensaje = prefijo, ContenidoMensaje = datos};
+            string json = JsonSerializer.Serialize(persona);
+
+            try 
             {
-                await _client.SendAsync(
-                    new ArraySegment<byte>(Encoding.UTF8.GetBytes(datos)),
-                    WebSocketMessageType.Text,
-                    true,
-                    CancellationToken.None);
+                if (_client != null && _client.State == WebSocketState.Open)
+                {
+                    await _client.SendAsync(
+                        new ArraySegment<byte>(Encoding.UTF8.GetBytes(json)),
+                        WebSocketMessageType.Text,
+                        true,
+                        CancellationToken.None);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Si algo sale mal al enviar, cerrar la conexión
+                _client?.Dispose();
+                _client = null;
+                throw new InvalidOperationException($"No se pudo enviar el mensaje: «{json}».", ex);
             }
         }
 

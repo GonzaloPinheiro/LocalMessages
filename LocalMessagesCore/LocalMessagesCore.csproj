@@ -99,7 +99,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Interfaces\ITransport.cs" />
-    <Compile Include="Modelos\Cliente.cs" />
+    <Compile Include="Modelos\EstructuraMensaje.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

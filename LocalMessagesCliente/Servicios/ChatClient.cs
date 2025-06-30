@@ -5,7 +5,8 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using LocalMessagesCore.Interfaces; 
+using LocalMessagesCore.Interfaces;
+using LocalMessagesCore.Modelos;
 
 namespace LocalMessagesApp.Servicios
 {
@@ -45,7 +46,7 @@ namespace LocalMessagesApp.Servicios
             OnConnectionStatusChanged?.Invoke(true);
 
             // 2) Enviar el nombre de usuario
-            await EnviarMensajeAsync(username);
+            await EnviarMensajeAsync(TipoMensaje.CMD_Nick, username);
 
             // 3) Lanzar el bucle de recepción en segundo plano
             _ = Task.Run(RecibirLoop, _cts.Token);
@@ -55,9 +56,9 @@ namespace LocalMessagesApp.Servicios
         /// <summary>
         /// Envía un texto al servidor de forma asíncrona.
         /// </summary>
-        public async Task EnviarMensajeAsync(string mensaje)
+        public async Task EnviarMensajeAsync(TipoMensaje prefijo, string mensaje)
         {
-            await _transporte.EnviarAsync(mensaje);
+            await _transporte.EnviarAsync(prefijo,mensaje);
         }
 
 

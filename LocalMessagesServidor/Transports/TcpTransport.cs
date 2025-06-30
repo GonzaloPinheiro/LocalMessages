@@ -1,9 +1,11 @@
 ﻿using LocalMessagesCore.Interfaces;
+using LocalMessagesCore.Modelos;
 using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace LocalMessagesServidor.Transports
 {
@@ -46,9 +48,12 @@ namespace LocalMessagesServidor.Transports
         /// Envía de forma asíncrona un texto al cliente usando UTF-8.
         /// </summary>
         /// <param name="datos">Cadena de texto a enviar.</param>
-        public async Task EnviarAsync(string datos)
+        public async Task EnviarAsync(TipoMensaje prefijo, string datos)
         {
-            var bytes = Encoding.UTF8.GetBytes(datos);
+            var persona = new MensajeCliente { PrefijoMensaje = prefijo, ContenidoMensaje = datos };
+            string json = JsonSerializer.Serialize(persona);
+
+            var bytes = Encoding.UTF8.GetBytes(json);
             await _client.GetStream().WriteAsync(bytes, 0, bytes.Length);
         }
 

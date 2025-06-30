@@ -9,12 +9,13 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Net.Sockets;
 using System.Net.WebSockets;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Net.Http;
 
 namespace LocalMessagesServidor.Servicios
 {
@@ -133,7 +134,12 @@ namespace LocalMessagesServidor.Servicios
             {
                 // 1)Primera lectura: recibir el nombre de usuario
                 cliente.Nombre = await cliente.Transporte.RecibirAsync();
+
+                //string texto = await cliente.Transporte.RecibirAsync();
+                //MensajeCliente mensaje = JsonSerializer.Deserialize<MensajeCliente>(texto);
+
                 Console.WriteLine($"Nuevo cliente conectado: {cliente.Nombre}\n");
+
 
                 // 2)Notificar a todos menos al emisor
                 await MensajesService.EnviarMensajeMenosEmisorAsync(

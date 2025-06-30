@@ -27,53 +27,7 @@ namespace LocalMessagesApp.Views
         {
             InitializeComponent();
             cbxTipoConexion.DataSource = Properties.Settings.Default.CanalesChat;
-            cbxTipoConexion.SelectedIndex = 0;
-
-            //_transporte = new TransporteTcp();
-            //_chat = new ChatClient(_transporte);
-
-            //Gestiona el mensaje o comando recibido
-            //_chat.OnMessageReceived += msg =>
-            //{
-            //    if (msg.StartsWith("CMD|")) //Comando
-            //    {
-            //        var partes = msg.Split('|', (char)StringSplitOptions.RemoveEmptyEntries);
-            //        string comando = partes[1].ToLower();
-            //        var nombres = partes.Skip(2).ToArray();
-
-            //        if (comando.Equals("list"))
-            //        {
-            //            Invoke((Action)(() => lbxUssers.Items.Clear()));
-
-            //            foreach (var nombre in nombres)
-            //            {
-            //                Invoke((Action)(() => lbxUssers.Items.Add(nombre)));
-            //            }
-            //        }
-                    
-            //    }
-            //    else //Mensaje normal
-            //    {
-            //        //Invocar en el hilo de la UI para evitar cross-thread errors
-            //        Invoke((Action)(() => lbxChat.Items.Add(msg)));
-            //    }                   
-            //};
-
-
-            //// Mostrar el estado de la conexión
-            //_chat.OnConnectionStatusChanged += connected =>
-            //{
-            //    Invoke((Action)(() =>
-            //    {
-            //        // Cambiar el texto del botón y mostrar notificación
-            //        btnConection.Text = connected ? "Desconectar" : "Conectar";
-            //        MessageBox.Show(connected ? "Conectado" : "Desconectado");
-            //    }));
-            //};
-
-
-
-            
+            cbxTipoConexion.SelectedIndex = 0;        
         }
 
 

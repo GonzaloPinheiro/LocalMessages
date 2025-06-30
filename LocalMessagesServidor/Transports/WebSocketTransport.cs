@@ -1,4 +1,5 @@
 ﻿using LocalMessagesCore.Interfaces;
+using LocalMessagesCore.Modelos;
 using LocalMessagesServidor.Models;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Net;
 using System.Net.WebSockets;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -68,11 +70,14 @@ namespace LocalMessagesServidor.Transports
             _webSocket?.Dispose();
         }
 
-        public async Task EnviarAsync(string datos)
+        public async Task EnviarAsync(TipoMensaje prefijo, string datos)
         {
+            var persona = new MensajeCliente { PrefijoMensaje = prefijo, ContenidoMensaje = datos };
+            string json = JsonSerializer.Serialize(persona);
+
             if (_webSocket != null && _webSocket.State == WebSocketState.Open)
             {
-                var buffer = Encoding.UTF8.GetBytes(datos);
+                var buffer = Encoding.UTF8.GetBytes(json);
 
 
                 await _webSocket.SendAsync(

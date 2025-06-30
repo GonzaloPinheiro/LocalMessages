@@ -1,5 +1,4 @@
-﻿using LocalMessagesCore.Modelos;
-using LocalMessagesServidor.Models;
+﻿using LocalMessagesServidor.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using LocalMessagesCore.Interfaces;
+using LocalMessagesCore.Modelos;
 
 
 namespace ChatCSharp.Server.Services
@@ -24,7 +24,7 @@ namespace ChatCSharp.Server.Services
             {
                 try
                 {
-                    await cliente.Transporte.EnviarAsync(texto);
+                    await cliente.Transporte.EnviarAsync(TipoMensaje.TXT, texto);
                 }
                 catch (Exception e)
                 {
@@ -46,7 +46,7 @@ namespace ChatCSharp.Server.Services
                 {
                     try
                     {
-                        await cliente.Transporte.EnviarAsync(texto);
+                        await cliente.Transporte.EnviarAsync(TipoMensaje.TXT, texto);
                     }
                     catch (Exception e)
                     {
@@ -63,7 +63,7 @@ namespace ChatCSharp.Server.Services
         {
             try
             {
-                await emisor.Transporte.EnviarAsync(texto);
+                await emisor.Transporte.EnviarAsync(TipoMensaje.TXT, texto);
             }
             catch (Exception e)
             {
