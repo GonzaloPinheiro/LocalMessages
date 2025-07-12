@@ -21,12 +21,12 @@ namespace LocalMessagesCore.Interfaces
         Task ConectarAsync(string host, int port);
 
         /// <summary>
-        /// // Envía texto (por ejemplo JSON) de forma asíncrona
+        /// // Envía texto de forma asíncrona usando json como formato de mensaje.
         /// </summary>
         Task EnviarAsync(TipoMensaje TipoMensaje, string datos);
 
         /// <summary>
-        /// Recibe un mensaje completo (por ejemplo JSON) de forma asíncrona.
+        /// Recibe un mensaje completo de forma asíncrona.
         /// </summary>
         Task<string> RecibirAsync();
 

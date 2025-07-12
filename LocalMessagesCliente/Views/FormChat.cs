@@ -1,5 +1,6 @@
 ﻿using LocalMessagesApp.Servicios;
 using LocalMessagesCore.Interfaces;
+using LocalMessagesCore.Modelos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -94,7 +95,8 @@ namespace LocalMessagesApp.Views
             }
 
             // Procesar la entrada del usuario y comprueba si es mensaje o comando
-            await ProcesarEntrada(text);
+            //await ProcesarEntrada(text);
+            await _chat.EnviarMensajeAsync(TipoMensaje.TXT, text);
             tbxMessage.Clear();
             tbxMessage.Focus();
         }
