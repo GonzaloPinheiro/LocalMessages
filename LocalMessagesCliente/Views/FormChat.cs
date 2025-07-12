@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -78,7 +79,20 @@ namespace LocalMessagesApp.Views
                 //Conectar de forma asíncrona
                 await _chat.ConnectarAsync("127.0.0.1", puerto, nick);
 
-
+                //Enviar el nombre de usuario al servidor
+                if(cbxTipoConexion.SelectedItem?.ToString() == "WebSocket") 
+                {
+                    await _chat.EnviarMensajeAsync(TipoMensaje.CNX_WST, nick);
+                }
+                else if(cbxTipoConexion.SelectedItem?.ToString() == "TCP")
+                {
+                    await _chat.EnviarMensajeAsync(TipoMensaje.CNX_TCP, nick);
+                }
+                else
+                {
+                    MessageBox.Show("Error al enviar el nombre de usuario");
+                    _chat.DesconectarCliente();
+                }
             }
         }
 
@@ -96,7 +110,19 @@ namespace LocalMessagesApp.Views
 
             // Procesar la entrada del usuario y comprueba si es mensaje o comando
             //await ProcesarEntrada(text);
-            await _chat.EnviarMensajeAsync(TipoMensaje.TXT, text);
+            if(text.StartsWith("/"))
+            {
+                // Enviar comando
+                await _chat.EnviarMensajeAsync(TipoMensaje.CMD_Nick, text);
+            }
+            else
+            {
+                // Enviar mensaje normal
+                await _chat.EnviarMensajeAsync(TipoMensaje.TXT, text);
+            }
+            
+
+            
             tbxMessage.Clear();
             tbxMessage.Focus();
         }
@@ -107,7 +133,7 @@ namespace LocalMessagesApp.Views
         /// </summary>
         private void SuscribirEventosChat()
         {
-            _chat.OnMessageReceived += Chat_OnMessageReceived;
+            _chat.OnMessageReceived += ProcesarMensajeRecibido;
             _chat.OnConnectionStatusChanged += Chat_OnConnectionStatusChanged;
         }
 
@@ -126,34 +152,49 @@ namespace LocalMessagesApp.Views
         /// <summary>
         /// Maneja los mensajes entrantes.
         /// </summary>
-        private void Chat_OnMessageReceived(string msg)
+        private void ProcesarMensajeRecibido(string msg)
         {
-            if (msg.StartsWith("CMD|"))
+            MensajeCliente mensajeDeserializado = JsonSerializer.Deserialize<MensajeCliente>(msg);
+
+            switch(mensajeDeserializado.PrefijoMensaje)
             {
-                // Split usando la sobrecarga correcta
-                var partes = msg.Split(
-                    new[] { '|' },
-                    StringSplitOptions.RemoveEmptyEntries
-                );
+                case TipoMensaje.TXT:
+                    // Mensaje de texto normal
+                    Invoke((Action)(() => lbxChat.Items.Add(mensajeDeserializado.ContenidoMensaje)));
+                    break;
 
-                if (partes.Length < 2) return;
-                var comando = partes[1].ToLower();
-                var nombres = partes.Skip(2);
+                case TipoMensaje.CMD_List:
+                    // Mensaje de lista de usuarios
 
-                if (comando == "list")
-                {
+                    // Split usando la sobrecarga correcta
+                    var partes = mensajeDeserializado.ContenidoMensaje.Split(
+                        new[] { '|' },
+                        StringSplitOptions.RemoveEmptyEntries
+                    );
+
+                    if (partes.Length < 2) return;
+                    var comando = partes[1].ToLower();
+                    var nombres = partes.Skip(2);
+
                     Invoke((Action)(() =>
                     {
                         lbxUssers.Items.Clear();
                         foreach (var nombre in nombres)
                             lbxUssers.Items.Add(nombre);
-                    }));
-                }
-            }
-            else
-            {
-                // Mensaje normal
-                Invoke((Action)(() => lbxChat.Items.Add(msg)));
+                    })); 
+                    
+                    //ProcesarListaUsuarios(mensajeDeserializado.ContenidoMensaje);
+                    break;
+
+                //case TipoMensaje.CNX_TCP:
+                //case TipoMensaje.CNX_WST:
+                //    // Mensaje de conexión
+                //    Invoke((Action)(() => lbxChat.Items.Add($"[Conexión] {mensajeDeserializado.ContenidoMensaje}")));
+                //    break;
+                default:
+                    // Otros tipos de mensajes
+                    Invoke((Action)(() => lbxChat.Items.Add($"[Desconocido] {mensajeDeserializado.ContenidoMensaje}")));
+                    break;
             }
         }
     }

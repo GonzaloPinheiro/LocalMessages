@@ -19,12 +19,21 @@ namespace LocalMessagesCore.Modelos
     [Flags]
     public enum TipoMensaje
     {
+        // General
         Ninguno = 0,
-        TXT = 1,
-        CMD = 2,
 
-        CMD_Nick = 4 | CMD,   // 00100 | 00010 = 00110 → 6 (comando /nick)
-        CMD_List = 8 | CMD,   // 01000 | 00010 = 01010 → 10 (comando /list)
-        CMD_Help = 16 | CMD   // 10000 | 00010 = 10010 → 18 (comando /help)
+        // Tipos de contenido
+        TXT = 1,          // 00000001
+        CMD = 2,          // 00000010
+        CNX = 3,          // 00000011 → Combinación de TXT y CMD
+
+        // Comandos específicos (siempre combinados con CMD)
+        CMD_Nick = 4 | CMD,   // 00000100 | 00000010 = 00000110 → 6
+        CMD_List = 8 | CMD,   // 00001000 | 00000010 = 00001010 → 10
+        CMD_Help = 16 | CMD,  // 00010000 | 00000010 = 00010010 → 18
+
+        // Protocolos o medios de transporte
+        CNX_TCP = 32 | CNX,       // 00100000 | 00000011 = 00100011 → 35
+        CNX_WST = 64 | CNX        // 01000000 | 00000011 = 01000011 → 67
     }
 }

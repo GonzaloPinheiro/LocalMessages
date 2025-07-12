@@ -1,4 +1,5 @@
 ﻿using ChatCSharp.Server.Services;
+using LocalMessagesCore.Modelos;
 using LocalMessagesServidor.Models;
 using LocalMessagesServidor.Servicios;
 using System;
@@ -20,42 +21,38 @@ namespace LocalMessagesServidor.Servicios
             ClienteConexion emisor,
             IEnumerable<ClienteConexion> clientesConectados)
         {
-            // Estructura: "CMD|<comando>|<arg1>|<arg2>|..."
-            var partes = mensaje.Split('|', (char)StringSplitOptions.RemoveEmptyEntries);
-            var comando = partes[1].ToLower();
-            var args = partes.Skip(2).ToArray();
+            // Estructura: "/nick usr"
+            var partes = mensaje.Split(' ', (char)StringSplitOptions.RemoveEmptyEntries);
+            var comando = partes[0].ToLower();
+            //var args = partes.Skip(2).ToArray();
 
             switch (comando)
             {
-                case "nick":
-                    if (args.Length == 1)
-                    {
-                        string nickAnterior = emisor.Nombre;
-                        emisor.Nombre = args[0];
-                        Console.WriteLine($"El usuario {nickAnterior} ha cambiado su nombre a {emisor.Nombre}");
+                case "/nick":
 
-                        //Notificar al resto del cambio de nick
-                        await MensajesService.EnviarMensajeMenosEmisorAsync(
-                            $"El usuario {nickAnterior} ha cambiado su nombre a {emisor.Nombre}",
-                            emisor,
-                            clientesConectados);
+                    string nickAnterior = emisor.Nombre;
+                    emisor.Nombre = partes[1];
+                    Console.WriteLine($"El usuario {nickAnterior} ha cambiado su nombre a {emisor.Nombre}");
 
-                        //Notificar al propio emisor del cambio de nick
-                        await MensajesService.EnviarMensajeAEmisorAsync(
-                            $"Tu nombre ha sido cambiado a {emisor.Nombre}",
-                            emisor);
+                    //Notificar al resto del cambio de nick
+                    await MensajesService.EnviarMensajeMenosEmisorAsync(
+                        $"El usuario {nickAnterior} ha cambiado su nombre a {emisor.Nombre}",
+                        TipoMensaje.TXT,
+                        emisor,
+                        clientesConectados);
 
-                        //Enviar lista actualizada a todos los clientes
-                        var lista = MensajesService.GenerarListaClientes(clientesConectados);
-                        await MensajesService.EnviarMensajeBroadcastAsync(lista, clientesConectados);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Comando /nick malformado");
-                    }
+                    //Notificar al propio emisor del cambio de nick
+                    await MensajesService.EnviarMensajeAEmisorAsync(
+                        $"Tu nombre ha sido cambiado a {emisor.Nombre}",
+                        emisor);
+
+                    //Enviar lista actualizada a todos los clientes
+                    var lista = MensajesService.GenerarListaClientes(clientesConectados);
+                    await MensajesService.EnviarMensajeBroadcastAsync(lista, TipoMensaje.CMD_List, clientesConectados);
+
                     break;
 
-                case "list":
+                case "/list":
                     //Construir el string con la lista y enviarlo solo al emisor
                     string listaUsuarios = "Usuarios conectados: " +
                         string.Join(", ", clientesConectados.Select(c => c.Nombre));

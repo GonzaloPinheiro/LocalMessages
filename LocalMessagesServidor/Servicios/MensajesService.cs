@@ -16,6 +16,7 @@ namespace ChatCSharp.Server.Services
         // 1)Enviar mensaje a todos
         public static async Task EnviarMensajeBroadcastAsync(
             string texto,
+            TipoMensaje tipoMensaje,
             IEnumerable<ClienteConexion> clientesConectados)
         {
             // Creamos una copia para evitar excep. por colección modificada
@@ -24,7 +25,7 @@ namespace ChatCSharp.Server.Services
             {
                 try
                 {
-                    await cliente.Transporte.EnviarAsync(TipoMensaje.TXT, texto);
+                    await cliente.Transporte.EnviarAsync(tipoMensaje, texto);
                 }
                 catch (Exception e)
                 {
@@ -36,6 +37,7 @@ namespace ChatCSharp.Server.Services
         // 2)Enviar mensaje a todos menos al indicado
         public static async Task EnviarMensajeMenosEmisorAsync(
             string texto,
+            TipoMensaje tipoMensaje,
             ClienteConexion emisor,
             IEnumerable<ClienteConexion> clientesConectados)
         {
@@ -46,7 +48,7 @@ namespace ChatCSharp.Server.Services
                 {
                     try
                     {
-                        await cliente.Transporte.EnviarAsync(TipoMensaje.TXT, texto);
+                        await cliente.Transporte.EnviarAsync(tipoMensaje, texto);
                     }
                     catch (Exception e)
                     {

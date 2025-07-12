@@ -132,52 +132,74 @@ namespace LocalMessagesServidor.Servicios
         {
             try
             {
-                // 1)Primera lectura: recibir el nombre de usuario
-                cliente.Nombre = await cliente.Transporte.RecibirAsync();
-
-                //string texto = await cliente.Transporte.RecibirAsync();
-                //MensajeCliente mensaje = JsonSerializer.Deserialize<MensajeCliente>(texto);
-
-                Console.WriteLine($"Nuevo cliente conectado: {cliente.Nombre}\n");
-
-
-                // 2)Notificar a todos menos al emisor
-                await MensajesService.EnviarMensajeMenosEmisorAsync(
-                    $"El usuario {cliente.Nombre} se ha conectado.",
-                    cliente,
-                    clientesConectados);
-
-                // 3)Enviar lista inicial de clientes
-                await MensajesService.EnviarMensajeBroadcastAsync(
-                    MensajesService.GenerarListaClientes(clientesConectados),
-                    clientesConectados);
-
-                // 4)Bucle de recepción de mensajes
-                string mensaje;
-                while ((mensaje = await cliente.Transporte.RecibirAsync()) != null)
+                // Bucle de recepción de mensajes
+                string mensajeRecibido;
+                while ((mensajeRecibido = await cliente.Transporte.RecibirAsync()) != null)
                 {
-                    if (mensaje.StartsWith("CMD|"))
+                    //string texto = await cliente.Transporte.RecibirAsync();
+                    MensajeCliente mensajeSerializado = JsonSerializer.Deserialize<MensajeCliente>(mensajeRecibido);
+
+
+                    switch(mensajeSerializado.PrefijoMensaje)
                     {
+
+                        // Procesar mensaje de texto
+                        case TipoMensaje.TXT:
+                            string texto = mensajeSerializado.ContenidoMensaje;
+
+                            // Mensaje normal: mostrar y reenviar
+                            Console.WriteLine($"Mensaje de {cliente.Nombre}: {texto}");
+                            await MensajesService.EnviarMensajeBroadcastAsync(
+                                $"{cliente.Nombre}: {texto}",
+                                TipoMensaje.TXT,
+                                clientesConectados);
+                            break;
+
+
                         // Procesar comando
-                        await ComandosService.ProcesarComandoAsync(
-                            mensaje,
-                            cliente,
-                            clientesConectados);
-                    }
-                    else
-                    {
-                        // Mensaje normal: mostrar y reenviar
-                        Console.WriteLine($"Mensaje de {cliente.Nombre}: {mensaje}");
-                        await MensajesService.EnviarMensajeBroadcastAsync(
-                            $"{cliente.Nombre}: {mensaje}",
-                            clientesConectados);
+                        case TipoMensaje.CMD_List:
+                        case TipoMensaje.CMD_Nick:
+                        case TipoMensaje.CMD_Help:
+
+                            await ComandosService.ProcesarComandoAsync(
+                                mensajeSerializado.ContenidoMensaje,
+                                cliente,
+                                clientesConectados);
+                            break;
+
+
+                        // Procesar mensaje de conexión (recibir el nombre del usuario)
+                        case TipoMensaje.CNX_TCP:
+                        case TipoMensaje.CNX_WST:
+                            cliente.Nombre = mensajeSerializado.ContenidoMensaje;
+                            Console.WriteLine($"Nuevo cliente conectado: {cliente.Nombre}\n");
+
+                            // 1)Notificar a todos menos al emisor
+                            await MensajesService.EnviarMensajeMenosEmisorAsync(
+                                $"El usuario {cliente.Nombre} se ha conectado.",
+                                TipoMensaje.TXT,
+                                cliente,
+                                clientesConectados);
+
+                            // 2)Enviar lista inicial de clientes
+                            await MensajesService.EnviarMensajeBroadcastAsync(
+                                MensajesService.GenerarListaClientes(clientesConectados),
+                                TipoMensaje.CMD_List,
+                                clientesConectados);
+
+                            break;
+                        default:
+                            Console.WriteLine($"Mensaje desconocido de {cliente.Nombre}: {mensajeRecibido}");
+                            break;
                     }
                 }
 
-                // 5)El cliente cerró la conexión
+
+                // El cliente cerró la conexión
                 Console.WriteLine($"Cliente desconectado: {cliente.Nombre}");
                 await MensajesService.EnviarMensajeMenosEmisorAsync(
                     $"El usuario {cliente.Nombre} se ha desconectado.",
+                    TipoMensaje.TXT,
                     cliente,
                     clientesConectados);
 
@@ -186,9 +208,11 @@ namespace LocalMessagesServidor.Servicios
                     clientesConectados.Remove(cliente);
                 }
 
-                // 6)Enviar lista actualizada
+
+                // Enviar lista actualizada
                 await MensajesService.EnviarMensajeBroadcastAsync(
                     MensajesService.GenerarListaClientes(clientesConectados),
+                    TipoMensaje.CMD_List,
                     clientesConectados);
             }
             catch (Exception ex)

@@ -45,10 +45,7 @@ namespace LocalMessagesApp.Servicios
             await _transporte.ConectarAsync(host, port);
             OnConnectionStatusChanged?.Invoke(true);
 
-            // 2) Enviar el nombre de usuario
-            await EnviarMensajeAsync(TipoMensaje.CMD_Nick, username);
-
-            // 3) Lanzar el bucle de recepción en segundo plano
+            // 2) Lanzar el bucle de recepción en segundo plano
             _ = Task.Run(RecibirLoop, _cts.Token);
         }
 
