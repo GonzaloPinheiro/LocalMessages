@@ -51,7 +51,7 @@
 | **v7**  | Login/registro con JWT y roles                      |
 | **v8**  | Cositas avanzadas: archivos, canales, emojis…       |
 
-> *Detalles en la carpeta ******`docs/`******.*
+> *Mas detalles en el readme de cada proyecto*
 
 ---
 

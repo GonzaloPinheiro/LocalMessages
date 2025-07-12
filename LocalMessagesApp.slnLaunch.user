@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Server+Cliente",
+    "Projects": [
+      {
+        "Path": "LocalMessagesServidor\\LocalMessagesServidor.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "LocalMessagesCliente\\LocalMessagesApp.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
