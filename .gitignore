@@ -1,1 +1,59 @@
-.cache/
+#Recomendaciones para .gitignore en proyectos de C# y .NET
+
+# Carpetas generadas por Visual Studio
+.vs/
+.vscode/
+*.user
+*.suo
+
+# Archivos de compilación
+bin/
+obj/
+[Bb]uild/
+[Bb]uild[Ll]og.*
+
+# Archivos temporales
+*.log
+*.tlog
+*.tmp
+*.bak
+*.cache
+*.db
+*.DS_Store
+
+# Archivos de dependencias de paquetes
+packages/
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+
+# Archivos de configuración local
+*.userprefs
+*.userosscache
+*.sln.docstates
+
+# Archivos de Rider (JetBrains)
+.idea/
+*.sln.iml
+
+# Publicaciones
+publish/
+out/
+
+# Test results
+TestResults/
+*.coverage
+*.coveragexml
+
+# Archivos de seguridad/secreto
+secrets.json
+
+# Dotnet CLI artifacts
+artifacts/
+
+# Archivos de configuración de NuGet
+*.snupkg
+
+# Otros archivos del sistema
+Thumbs.db
+desktop.ini
