@@ -1,5 +1,6 @@
 ﻿using ChatCSharp.Server.Services;
 using LocalMessagesCore.Modelos;
+using LocalMessagesServidor.Data;
 using LocalMessagesServidor.Models;
 using LocalMessagesServidor.Servicios;
 using LocalMessagesServidor.Transports;
@@ -149,6 +150,8 @@ namespace LocalMessagesServidor.Servicios
 
                             // Mensaje normal: mostrar y reenviar
                             Console.WriteLine($"Mensaje de {cliente.Nombre}: {texto}");
+                            await RepositorioMensajes.GuardarMensajeRecibido(texto, cliente.Nombre);
+
                             await MensajesService.EnviarMensajeBroadcastAsync(
                                 $"{cliente.Nombre}: {texto}",
                                 TipoMensaje.TXT,

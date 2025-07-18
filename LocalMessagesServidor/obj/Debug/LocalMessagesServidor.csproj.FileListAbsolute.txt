@@ -58,3 +58,7 @@ C:\GitHub\LocalMessages\LocalMessagesServidor\bin\Debug\System.IO.Pipelines.dll
 C:\GitHub\LocalMessages\LocalMessagesServidor\bin\Debug\System.Text.Json.dll
 C:\GitHub\LocalMessages\LocalMessagesServidor\bin\Debug\System.IO.Pipelines.xml
 C:\GitHub\LocalMessages\LocalMessagesServidor\bin\Debug\System.Text.Json.xml
+C:\GitHub\LocalMessages\LocalMessagesServidor\bin\Debug\Dapper.Contrib.dll
+C:\GitHub\LocalMessages\LocalMessagesServidor\bin\Debug\Dapper.dll
+C:\GitHub\LocalMessages\LocalMessagesServidor\bin\Debug\Dapper.xml
+C:\GitHub\LocalMessages\LocalMessagesServidor\bin\Debug\Dapper.Contrib.xml
