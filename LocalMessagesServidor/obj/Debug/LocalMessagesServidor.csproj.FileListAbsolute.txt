@@ -62,3 +62,4 @@ C:\GitHub\LocalMessages\LocalMessagesServidor\bin\Debug\Dapper.Contrib.dll
 C:\GitHub\LocalMessages\LocalMessagesServidor\bin\Debug\Dapper.dll
 C:\GitHub\LocalMessages\LocalMessagesServidor\bin\Debug\Dapper.xml
 C:\GitHub\LocalMessages\LocalMessagesServidor\bin\Debug\Dapper.Contrib.xml
+C:\GitHub\LocalMessages\LocalMessagesServidor\bin\Debug\Dapper.SqlBuilder.dll

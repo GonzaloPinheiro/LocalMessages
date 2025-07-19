@@ -2,6 +2,7 @@
 using LocalMessagesCore.Modelos;
 using LocalMessagesServidor.Data;
 using LocalMessagesServidor.Models;
+using LocalMessagesServidor.ModelsDB;
 using LocalMessagesServidor.Servicios;
 using LocalMessagesServidor.Transports;
 using System;
@@ -156,7 +157,7 @@ namespace LocalMessagesServidor.Servicios
                                 $"{cliente.Nombre}: {texto}",
                                 TipoMensaje.TXT,
                                 clientesConectados);
-                            break;
+                        break;
 
 
                         // Procesar comando
@@ -168,7 +169,7 @@ namespace LocalMessagesServidor.Servicios
                                 mensajeSerializado.ContenidoMensaje,
                                 cliente,
                                 clientesConectados);
-                            break;
+                        break;
 
 
                         // Procesar mensaje de conexión (recibir el nombre del usuario)
@@ -190,7 +191,19 @@ namespace LocalMessagesServidor.Servicios
                                 TipoMensaje.CMD_List,
                                 clientesConectados);
 
-                            break;
+                            // 3) Enviar últimos mensajes
+                            var mensajes = await RepositorioMensajes.ObtenerUltimosMensajes(20);
+
+                            foreach (var mensaje in mensajes)
+                            {
+                                await MensajesService.EnviarMensajeAEmisorAsync(
+                                    JsonSerializer.Serialize(mensaje.Contenido),
+                                    cliente
+                                );
+                            }
+
+                        break;
+
                         default:
                             Console.WriteLine($"Mensaje desconocido de {cliente.Nombre}: {mensajeRecibido}");
                             break;

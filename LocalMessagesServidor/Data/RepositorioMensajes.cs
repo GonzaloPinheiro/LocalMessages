@@ -22,11 +22,27 @@ namespace LocalMessagesServidor.Data
                 {
                     Contenido = mensaje,
                     Remitente = nombreRemitente, // Asignar un remitente genérico
-                    Receptor = null, // Asignar null para mensajes públicos (sin implementear mensajes privados)
+                    Receptor = null, // Asignar null para mensajes públicos (sin implementar mensajes privados)
                     FechaEnvio = DateTime.Now,
                 };
 
                 await conexion.InsertAsync(mensajeRecibido);
+            }
+        }
+
+        public static async Task<IEnumerable<MensajeChat>> ObtenerUltimosMensajes(int cantidadMensajes)
+        {
+            using (var conexion = FabricaConexion.CrearConexion())
+            {
+                await conexion.OpenAsync();
+
+                //return conexion.Query<MensajeChat>(
+                //    "SELECT TOP (@cantidadMensajes) * FROM MensajesChat ORDER BY FechaEnvio DESC",
+                //    new { cantidadMensajes });
+
+                string sql = $"SELECT TOP {cantidadMensajes} * FROM MensajesChat ORDER BY FechaEnvio ASC";
+
+                return await conexion.QueryAsync<MensajeChat>(sql);
             }
         }
     }
