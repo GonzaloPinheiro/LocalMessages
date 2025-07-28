@@ -197,7 +197,7 @@ namespace LocalMessagesServidor.Servicios
                             foreach (var mensaje in mensajes)
                             {
                                 await MensajesService.EnviarMensajeAEmisorAsync(
-                                    JsonSerializer.Serialize(mensaje.Contenido),
+                                    JsonSerializer.Serialize(mensaje.Remitente + ": " + mensaje.Contenido),
                                     cliente
                                 );
                             }
