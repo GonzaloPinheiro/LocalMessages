@@ -45,7 +45,7 @@
 | **v1 ✅**  | Chat básico (consola TCP + WinForms)                |
 | **v2 ✅**  | Varias conexiones, nicknames y mensajes broadcast   |
 | **v3 ✅**  | Capas de transporte: TCP vs WebSockets              |
-| **v4**  | Guardar chat en DB con Dapper + SQL                 |
+| **v4 ✅**  | Guardar chat en DB con Dapper + SQL                 |
 | **v5**  | Meterle un poco de seguridad (TLS/SSL y cifrado)    |
 | **v6**  | Despliegue del servidor en Raspberry Pi con Windows |
 | **v7**  | Login/registro con JWT y roles                      |
