@@ -39,6 +39,8 @@ namespace LocalMessagesApp.Views
             if (btnConection.Text == "Desconectar")
             {
                 _chat.DesconectarCliente();
+                lbxChat.Items.Clear();
+                lbxUssers.Items.Clear();
             }
             else
             {
@@ -93,6 +95,8 @@ namespace LocalMessagesApp.Views
                     MessageBox.Show("Error al enviar el nombre de usuario");
                     _chat.DesconectarCliente();
                 }
+
+                //Solicitar ultimos mensajes?
             }
         }
 

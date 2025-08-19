@@ -159,6 +159,20 @@ namespace LocalMessagesServidor.Servicios
                                 clientesConectados);
                         break;
 
+                        //Enviar últimos mensajes
+                        case TipoMensaje.MSG:
+
+                            var mensajes = await RepositorioMensajes.ObtenerUltimosMensajes(20);
+
+                            foreach (var mensaje in mensajes)
+                            {
+                                await MensajesService.EnviarMensajeAEmisorAsync(
+                                    JsonSerializer.Serialize(mensaje.Remitente + ": " + mensaje.Contenido),
+                                    cliente
+                                );
+                            }
+                            break;
+
 
                         // Procesar comando
                         case TipoMensaje.CMD_List:
@@ -190,17 +204,6 @@ namespace LocalMessagesServidor.Servicios
                                 MensajesService.GenerarListaClientes(clientesConectados),
                                 TipoMensaje.CMD_List,
                                 clientesConectados);
-
-                            // 3) Enviar últimos mensajes
-                            var mensajes = await RepositorioMensajes.ObtenerUltimosMensajes(20);
-
-                            foreach (var mensaje in mensajes)
-                            {
-                                await MensajesService.EnviarMensajeAEmisorAsync(
-                                    JsonSerializer.Serialize(mensaje.Remitente + ": " + mensaje.Contenido),
-                                    cliente
-                                );
-                            }
 
                         break;
 

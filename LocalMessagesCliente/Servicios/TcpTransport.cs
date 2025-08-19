@@ -2,6 +2,7 @@
 using LocalMessagesCore.Modelos;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -88,6 +89,25 @@ namespace LocalMessagesApp.Servicios
                 //Falla en la lectura de datos
                 throw new InvalidOperationException("Error al recibir datos(cliente desconectado?).", ex);
             }
+            //try
+            //{
+            //    var stream = _cliente.GetStream();
+            //    using (var reader = new StreamReader(stream, Encoding.UTF8, false, 4096, true))
+            //    {
+            //        string linea = await reader.ReadLineAsync();
+            //        if (linea == null)
+            //        {
+            //            // El servidor cerró la conexión
+            //            _cliente.Close();
+            //            return null;
+            //        }
+            //        return linea;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw new InvalidOperationException("Error al recibir datos(cliente desconectado?).", ex);
+            //}
         }
 
 

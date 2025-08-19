@@ -47,6 +47,9 @@ namespace LocalMessagesApp.Servicios
 
             // 2) Lanzar el bucle de recepción en segundo plano
             _ = Task.Run(RecibirLoop, _cts.Token);
+
+            // 3) Solicitar historial mensajes
+            await EnviarMensajeAsync(TipoMensaje.MSG, "20");
         }
 
 
