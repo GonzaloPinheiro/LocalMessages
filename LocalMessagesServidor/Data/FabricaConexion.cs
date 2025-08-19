@@ -9,8 +9,8 @@ namespace LocalMessagesServidor.Data
 {
     public static class FabricaConexion
     {
-        //private readonly static string cadenaConexion = "Server=localhost;Database=ChatMensajesDb;Trusted_Connection=True;";
-        private readonly static string cadenaConexion = "Initial Catalog=ChatMensajesDb; Data source=localhost; user=sa; password=admin";
+        private readonly static string cadenaConexion = "Server=localhost;Database=ChatMensajesDb;Trusted_Connection=True;";
+        //private readonly static string cadenaConexion = "Initial Catalog=ChatMensajesDb; Data source=localhost; user=sa; password=admin";
 
         public static SqlConnection CrearConexion()
         {
@@ -18,3 +18,4 @@ namespace LocalMessagesServidor.Data
         }
     }
 }
+
